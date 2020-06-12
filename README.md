@@ -100,7 +100,7 @@ Download documents from master node:
 
 scp ubuntu@X:/usr/share/doc/slurm-wlm-doc/html/configurator.html ./
 
-	Where X=master node IP where the documents are.
+Where X=master node IP where the documents are.
 
 Note: Depending on the Slurm version, the configurator may be in /usr/share/doc/slurm-wlm/html/.
 
@@ -120,28 +120,32 @@ and then run:
 
 slurmd -C
 
-a)	Set ControlMachine to node-0 (if the master node is named as such)
-b)	Set NodeName to node-[1-3] (if named and numbered as such)
-c)	Set SlurmUser to slurm
-d)	Set StateSaveLocation to /var/spool/slurm-llnl
-e)	Set Process Tracking to Cgroup
-f)	Set Task Launch to Cgroup
-g)	Set Event Logging SlurmctldLogFile to /var/log/slurm-llnl/slurmctld.log
-h)	Set Event Logging SlurmdLogFile to /var/log/slurm-llnl/slurmd.log
-i)	Set Process ID Logging SlurmctldPidFile to /var/run/slurmctld.pid
-j)	Set Process ID Logging SlurmdPidFile to /var/run/slurmd.pid
+</br>
+
+a)	[Set ControlMachine to node-0 (if the master node is named as such)]
+b)	[Set NodeName to node-[1-3] (if named and numbered as such)]
+c)	[Set SlurmUser to slurm]
+d)	[Set StateSaveLocation to /var/spool/slurm-llnl]
+e)	[Set Process Tracking to Cgroup]
+f)	[Set Task Launch to Cgroup]
+g)	[Set Event Logging SlurmctldLogFile to /var/log/slurm-llnl/slurmctld.log]
+h)	[Set Event Logging SlurmdLogFile to /var/log/slurm-llnl/slurmd.log]
+i)	[Set Process ID Logging SlurmctldPidFile to /var/run/slurmctld.pid]
+j)	[Set Process ID Logging SlurmdPidFile to /var/run/slurmd.pid]
 
 The below settings are for configuring SlurmDBD and are optional (they can be left out if SlurmDBD is not needed or for debugging purposes, and added in later)
 
-k)	Set Job Completion Logging to MySQL
-l)	Set JobCompLoc to slurm_acct_db
-m)	Set JonCompHost to localhost
-n)	Set JobCompUser to slurm
-o)	Set JobCompPass to password (or whatever password was chosen for MariaDB)
-p)	Set Accounting Gather to None
-q)	Set Job Accounting Storage to FileTxt
+k)	[Set Job Completion Logging to MySQL]
+l)	[Set JobCompLoc to slurm_acct_db]
+m)	[Set JonCompHost to localhost]
+n)	[Set JobCompUser to slurm]
+o)	[Set JobCompPass to password (or whatever password was chosen for MariaDB)]
+p)	[Set Accounting Gather to None]
+q)	[Set Job Accounting Storage to FileTxt]
 
-r)	All other settings can be left as default.
+r)	[All other settings can be left as default.]
+
+</br>
 
 Finally copy the output of the configurator webpage into a file called slurm.conf and send a copy to the home directory of your master node (simply copying and pasting into the file works best to preserve formatting). 
 
