@@ -120,7 +120,6 @@ and then run:
 
 slurmd -C
 
-</br>
 
 1.	Set ControlMachine to node-0 (if the master node is named as such)
 2.	Set NodeName to node-[1-3] (if named and numbered as such)
@@ -144,8 +143,6 @@ The below settings are for configuring SlurmDBD and are optional (they can be le
 17.	Set Job Accounting Storage to FileTxt
 
 18.	All other settings can be left as default.
-
-</br>
 
 Finally copy the output of the configurator webpage into a file called slurm.conf and send a copy to the home directory of your master node (simply copying and pasting into the file works best to preserve formatting). 
 
