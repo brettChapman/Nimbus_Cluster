@@ -1,0 +1,4 @@
+theme: jekyll-theme-cayman
+title: Nimbus Cluster
+description: Instructions and scripts for setting up a Nimbus Cluster with a Slurm Workload Manager
+show_downloads: true
