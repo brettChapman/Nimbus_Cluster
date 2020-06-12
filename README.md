@@ -14,8 +14,6 @@ Additional useful documentation:
 
 [Slurm database installation Wiki](https://wiki.fysik.dtu.dk/niflheim/Slurm_database)
 
-<br />
-
 ## Setting up the cluster
 
 ### Initial setup
