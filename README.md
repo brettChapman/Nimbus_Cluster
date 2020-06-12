@@ -12,7 +12,7 @@ Additional useful documentation:
 
 [Slurm installation Wiki](https://wiki.fysik.dtu.dk/niflheim/Slurm_installation)
 
-[Slurm database installation](https://wiki.fysik.dtu.dk/niflheim/Slurm_database)
+[Slurm database installation Wiki](https://wiki.fysik.dtu.dk/niflheim/Slurm_database)
 
 <br />
 
