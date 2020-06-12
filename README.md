@@ -116,8 +116,9 @@ ssh into one of the worker nodes (e.g. ssh node-1) and then:
 sudo apt-get install -yq slurmd
 ```
 and then run:
-
+```
 slurmd -C
+```
 
 ##### Set up the following in the config file:
 
