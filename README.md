@@ -14,6 +14,8 @@ Additional useful documentation:
 
 [Slurm database installation Wiki](https://wiki.fysik.dtu.dk/niflheim/Slurm_database)
 
+Disclaimer: This is my first time setting up a cluster with Slurm. If you have more experience and wouldn't mind making any suggestions or pointing out something I missed, please let me know. I'm contactable on brett.chapman78@gmail.com or brett.chapman@murdoch.edu.au. Thank you.
+
 ## Setting up the cluster
 
 ### Initial setup
