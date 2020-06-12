@@ -145,11 +145,11 @@ slurmd -C
 
 Finally copy the output of the configurator webpage into a file called slurm.conf and send a copy to the home directory of your master node (simply copying and pasting into the file works best to preserve formatting). 
 
-3.	Copy hosts to home directory of all nodes
+#### 3. Copy hosts to home directory of all nodes
 ```
 pdcp -a /etc/hosts ~/
 ```
-4.	Copy and run the following scripts:
+#### 4.	Copy and run the following scripts:
 
 Copy scripts setup_host_for_slurm.sh and install_slurm.sh to your home directory
 
@@ -161,24 +161,24 @@ bash ./install_slurm.sh
 ```
 ### MariaDB and MySQL setup
 
-1.	Enable SlurmDBD:
+#### 1.	Enable SlurmDBD:
 ```
 sudo systemctl enable slurmdbd
 ```
-2.	Install, start and enable MariaDB:
+#### 2.	Install, start and enable MariaDB:
 ```
 sudo apt-get install mariadb-server -yq
 sudo systemctl start mariadb
 sudo systemctl enable mariadb
 sudo systemctl status mariadb
 ```
-3.	Configure the MariaDB root password:
+#### 3.	Configure the MariaDB root password:
 ```
 sudo /usr/bin/mysql_secure_installation
 ```
 Set password as “password” (as selected in the slurm.conf flle) and select Y for remaining questions.
 
-4.	Grant permissions and create database in MariaDB:
+#### 4.	Grant permissions and create database in MariaDB:
 ```
 sudo mysql -p (enter chosen password)
 ```
@@ -193,7 +193,7 @@ Check that all grants to slurm user have been accepted:
 MariaDB> show grants;
 MariaDB> quit;
 ```
-5.	Edit MariaDB config files:
+#### 5.	Edit MariaDB config files:
 ```
 sudo vim /etc/mysql/my.cnf
 ```
@@ -208,13 +208,13 @@ innodb_lock_wait_timeout=900
 
 Note: it is recommended to set the innodb_buffer_pool_size to half the RAM on the slurmdbd server. In this case it is 16GB (half of 32G).
 
-6.	Implement the changes:
+#### 6.	Implement the changes:
 ```
 sudo systemctl stop mariadb
 sudo mv /var/lib/mysql/ib_logfile? /tmp/
 sudo systemctl start mariadb
 ```
-7.	Check that the changes took affect:
+#### 7.	Check that the changes took affect:
 ```
 sudo mysql -p (enter chosen password)
 ```
@@ -224,7 +224,7 @@ MariaDB> SHOW VARIABLES LIKE 'innodb_buffer_pool_size';
 ```
 ### SLURMDBD setup
 
-1.	Create SlurmDBD config file:
+#### 1.	Create SlurmDBD config file:
 ```
 zcat /usr/share/doc/slurmdbd/examples/slurmdbd.conf.simple.gz > slurmdbd.conf
 ```
@@ -240,22 +240,22 @@ Edit the slurmdbd.conf file (sudo vim slurmdbd.conf) set the following:
 - Set PidFile to /var/run/slurmdbd.pid
 - Set SlurmUser to slurm
 
-2.	Move the slurmdbd.conf to the slurm directory:
+#### 2.	Move the slurmdbd.conf to the slurm directory:
 ```
 sudo mv slurmdbd.conf /etc/slurm-llnl/
 ```
-3.	Set permissions and ownership:
+#### 3.	Set permissions and ownership:
 ```
 sudo chown slurm:slurm /etc/slurm-llnl/slurmdbd.conf
 sudo chmod 664 /etc/slurm-llnl/slurmdbd.conf
 ```
-4.	Run SlurmDBD interactively with debug options to check for any errors (this will also test if the MariaDB “slurm_acct_db” database can be populated):
+#### 4.	Run SlurmDBD interactively with debug options to check for any errors (this will also test if the MariaDB “slurm_acct_db” database can be populated):
 ```
 sudo slurmdbd -D -vvv
 ```
 End with ctrl-C
 
-5.	Check that the “slurm_acct_db” has been populated with tables:
+#### 5.	Check that the “slurm_acct_db” has been populated with tables:
 ```
 mysql -p -u slurm slurm_acct_db
 ```
@@ -264,7 +264,7 @@ mysql -p -u slurm slurm_acct_db
 MariaDB> show tables;
 MariaDB> quit;
 ```
-6.	Start the SlurmDBD service:
+#### 6.	Start the SlurmDBD service:
 ```
 sudo systemctl enable slurmdbd
 sudo systemctl start slurmdbd
@@ -272,7 +272,7 @@ sudo systemctl status slurmdbd
 ```
 ### FINAL error checks:
 
-1.	Check for any errors with SlurmDBD, SlurmCTLD and SlurmD:
+#### 1.	Check for any errors with SlurmDBD, SlurmCTLD and SlurmD:
 
 Check SlurmDBD for errors:
 ```
@@ -330,7 +330,7 @@ Note: You should now be able to run the following commands with no problems:
 
 ### Setup NFS data volume
 
-1.	Look in /etc/hosts on the master node (node-0 in this case):
+#### 1.	Look in /etc/hosts on the master node (node-0 in this case):
 ```
 grep 192.168 /etc/hosts
 192.168.0.57 node-0
@@ -338,7 +338,7 @@ grep 192.168 /etc/hosts
 192.168.0.65 node-2
 192.168.0.69 node-3
 ```
-2.	Replace your IP addresses in the setup_NFS.sh script. The final mounted disk is on the master node (in this case node-0 with IP 192.168.0.57).
+#### 2.	Replace your IP addresses in the setup_NFS.sh script. The final mounted disk is on the master node (in this case node-0 with IP 192.168.0.57).
 
 	Note: If mounting the folders goes wrong and you end up with stale file handles, just soft reboot the instances and then you can remove the 	folders.
 
@@ -349,7 +349,7 @@ grep 192.168 /etc/hosts
 	```
 ### Installing essential applications
 
-1.	Installation of Docker
+#### 1.	Installation of Docker
 	
 	```
 	sudo apt install docker.io -y
@@ -364,7 +364,7 @@ grep 192.168 /etc/hosts
 
 	Then soft-reboot all the nodes
 
-2.	Installation of GO
+#### 2.	Installation of GO
 
 	```
 	sudo apt install golang -y
@@ -372,7 +372,7 @@ grep 192.168 /etc/hosts
 	pdsh -a sudo apt install golang -y
 	```
 
-3.	Installation of Singularity
+#### 3.	Installation of Singularity
 
 	Install dependencies on all nodes:
 
@@ -402,7 +402,7 @@ grep 192.168 /etc/hosts
 	bash ./install_singularity.sh
 	```
 
-4.	Compile Singularity:
+#### 4.	Compile Singularity:
 
 	Copy scripts compile_singularity_per_node.sh and compile_singularity.sh to your home directory
 
