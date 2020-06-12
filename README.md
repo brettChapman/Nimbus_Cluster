@@ -363,8 +363,8 @@ pdsh -a sudo slurmd
 Note: You should now be able to run the following commands with no problems:
 sinfo (displays node information)
 sacct (requires SlurmDBD and shows previous or running jobs)
-scontrol show jobs (shows previous or currently running jobs)
-scontrol ping (pings the master node and shows its status)
+scontrol show jobs (shows details of currently running jobs)
+scontrol ping (pings slurmctld and shows its status)
 
 Note: I successfully ran Slurm with Ubuntu 20.04 LTS and Slurm version 19.05.5 (for some reason the Slurm controller appears to only fail when using the Pawsey custom built Ubuntu images).
 
