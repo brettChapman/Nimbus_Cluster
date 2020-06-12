@@ -132,7 +132,7 @@ slurmd -C
 - Set Process ID Logging SlurmctldPidFile to /var/run/slurmctld.pid
 - Set Process ID Logging SlurmdPidFile to /var/run/slurmd.pid
 
-The below settings are for configuring SlurmDBD and are optional (they can be left out if SlurmDBD is not needed or for debugging purposes, and added in later)
+##### The below settings are for configuring SlurmDBD and are optional (they can be left out if SlurmDBD is not needed or for debugging purposes, and added in later)
 
 - Set Job Completion Logging to MySQL
 - Set JobCompLoc to slurm_acct_db
@@ -141,7 +141,6 @@ The below settings are for configuring SlurmDBD and are optional (they can be le
 - Set JobCompPass to password (or whatever password was chosen for MariaDB)
 - Set Accounting Gather to None
 - Set Job Accounting Storage to FileTxt
-
 - All other settings can be left as default.
 
 Finally copy the output of the configurator webpage into a file called slurm.conf and send a copy to the home directory of your master node (simply copying and pasting into the file works best to preserve formatting). 
@@ -156,8 +155,10 @@ Copy scripts setup_host_for_slurm.sh and install_slurm.sh to your home directory
 
 The install_slurm.sh script configures the master node, copies the setup_host_for_slurm.sh script to all nodes and configures them. It is expected that the slurm.conf file is in the home directory of user ubuntu.
 
-Run bash ./install_slurm.sh
-
+Run:
+```
+bash ./install_slurm.sh
+```
 ### MariaDB and MySQL setup
 
 1.	Enable SlurmDBD:
@@ -320,10 +321,10 @@ pdsh -a sudo systemctl enable slurmd
 pdsh -a sudo slurmd
 ```
 Note: You should now be able to run the following commands with no problems:
-sinfo (displays node information)
-sacct (requires SlurmDBD and shows previous or running jobs)
-scontrol show jobs (shows details of currently running jobs)
-scontrol ping (pings slurmctld and shows its status)
+>sinfo (displays node information)
+>sacct (requires SlurmDBD and shows previous or running jobs)
+>scontrol show jobs (shows details of currently running jobs)
+>scontrol ping (pings slurmctld and shows its status)
 
 ### **Note: I successfully ran Slurm with Ubuntu 20.04 LTS and Slurm version 19.05.5 (for some reason the Slurm controller appears to only fail when using the Pawsey custom built Ubuntu images).**
 
