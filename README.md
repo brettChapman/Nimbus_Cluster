@@ -516,20 +516,20 @@ Submitting jobs with SLURM
 
 Sbatch example (submit.sh):
 
-#!/bin/bash
-#SBATCH --nodes=3
-# allow use of all the memory on the node
-#SBATCH --ntasks-per-node=8
-#SBATCH --mem=0
-# request all CPU cores on the node
-#SBATCH --exclusive
-# Customize --partition as appropriate
-#SBATCH --partition=debug
-
-srun -n 24 ./my_program.py
+>#!/bin/bash
+>#SBATCH --nodes=3
+># allow use of all the memory on the node
+>#SBATCH --ntasks-per-node=8
+>#SBATCH --mem=0
+># request all CPU cores on the node
+>#SBATCH --exclusive
+># Customize --partition as appropriate
+>#SBATCH --partition=debug
+>
+>srun -n 24 ./my_program.py
 
 Running the job:
-sbatch submit.sh
+>sbatch submit.sh
 
 In this example we are running the job across 3 nodes, each with 8 cores, totalling 24 processors.
 
