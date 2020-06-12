@@ -1,7 +1,5 @@
 # README.md - `Nimbus Cluster`
 
-<p align="justify">
-
 This repository contains instructions and scripts for setting up a Nimbus Cluster using Slurm (https://nimbus.pawsey.org.au/).
 
 Additional useful documentation:
@@ -15,7 +13,6 @@ https://www.admin-magazine.com/HPC/Articles/Resource-Management-with-Slurm
 https://wiki.fysik.dtu.dk/niflheim/Slurm_installation
 
 https://wiki.fysik.dtu.dk/niflheim/Slurm_database
-</p>
 
 <br />
 
