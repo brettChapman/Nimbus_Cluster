@@ -353,12 +353,12 @@ Errors can also be viewed in the log files:
 
 	Install dependencies on all nodes:
 
-		Copy scripts singdep_per_node.sh and singdep.sh to your home directory		
+	Copy scripts singdep_per_node.sh and singdep.sh to your home directory		
 
-		Run:
-		```
-		bash ./singdep.sh
-		```
+	Run:
+	```
+	bash ./singdep.sh
+	```
 
 	Checking out Singularity from GitHub on all nodes:
 
@@ -375,7 +375,9 @@ Errors can also be viewed in the log files:
 
 	
 	Run:
-	```bash ./install_singularity.sh```
+	```
+	bash ./install_singularity.sh
+	```
 
 4.	Compile Singularity:
 
