@@ -122,28 +122,28 @@ slurmd -C
 
 </br>
 
-a)	[Set ControlMachine to node-0 (if the master node is named as such)]
-b)	[Set NodeName to node-[1-3] (if named and numbered as such)]
-c)	[Set SlurmUser to slurm]
-d)	[Set StateSaveLocation to /var/spool/slurm-llnl]
-e)	[Set Process Tracking to Cgroup]
-f)	[Set Task Launch to Cgroup]
-g)	[Set Event Logging SlurmctldLogFile to /var/log/slurm-llnl/slurmctld.log]
-h)	[Set Event Logging SlurmdLogFile to /var/log/slurm-llnl/slurmd.log]
-i)	[Set Process ID Logging SlurmctldPidFile to /var/run/slurmctld.pid]
-j)	[Set Process ID Logging SlurmdPidFile to /var/run/slurmd.pid]
+1.	Set ControlMachine to node-0 (if the master node is named as such)
+2.	Set NodeName to node-[1-3] (if named and numbered as such)
+3.	Set SlurmUser to slurm
+4.	Set StateSaveLocation to /var/spool/slurm-llnl
+5.	Set Process Tracking to Cgroup
+6.	Set Task Launch to Cgroup
+7.	Set Event Logging SlurmctldLogFile to /var/log/slurm-llnl/slurmctld.log
+8.	Set Event Logging SlurmdLogFile to /var/log/slurm-llnl/slurmd.log
+9.	Set Process ID Logging SlurmctldPidFile to /var/run/slurmctld.pid
+10.	Set Process ID Logging SlurmdPidFile to /var/run/slurmd.pid
 
 The below settings are for configuring SlurmDBD and are optional (they can be left out if SlurmDBD is not needed or for debugging purposes, and added in later)
 
-k)	[Set Job Completion Logging to MySQL]
-l)	[Set JobCompLoc to slurm_acct_db]
-m)	[Set JonCompHost to localhost]
-n)	[Set JobCompUser to slurm]
-o)	[Set JobCompPass to password (or whatever password was chosen for MariaDB)]
-p)	[Set Accounting Gather to None]
-q)	[Set Job Accounting Storage to FileTxt]
+11.	Set Job Completion Logging to MySQL
+12.	Set JobCompLoc to slurm_acct_db
+13.	Set JonCompHost to localhost
+14.	Set JobCompUser to slurm
+15.	Set JobCompPass to password (or whatever password was chosen for MariaDB)
+16.	Set Accounting Gather to None
+17.	Set Job Accounting Storage to FileTxt
 
-r)	[All other settings can be left as default.]
+18.	All other settings can be left as default.
 
 </br>
 
