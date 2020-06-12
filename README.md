@@ -20,7 +20,7 @@ Additional useful documentation:
 
 ### Initial setup
 
-Prepare clusters according to: [https://support.pawsey.org.au/documentation/display/US/Manage+an+Instance+Cluster](Pawsey Managing Instances).
+Prepare clusters according to: [Pawsey Managing Instances](https://support.pawsey.org.au/documentation/display/US/Manage+an+Instance+Cluster).
 
 Create a cluster called “node”, which will create multiple nodes at once and name them as node-1, -2 etc. Multiple can be setup at the same time. Then create one additional node as node-0 as the master node. 
 
