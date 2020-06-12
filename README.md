@@ -20,7 +20,6 @@ https://wiki.fysik.dtu.dk/niflheim/Slurm_database
 
 ### Initial setup
 
-<p align="justify">
 Prepare clusters according to:
 https://support.pawsey.org.au/documentation/display/US/Manage+an+Instance+Cluster
 
@@ -47,7 +46,6 @@ ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 ff02::3 ip6-allhosts
 ```
-</p>
 	
 #### 1.	Install pdsh as described here:
 https://support.pawsey.org.au/documentation/display/US/Nimbus+-+Managing+a+VM+Cluster
