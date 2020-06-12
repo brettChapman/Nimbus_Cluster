@@ -54,9 +54,10 @@ Example:
 #### 1.	Install pdsh as described here:
 https://support.pawsey.org.au/documentation/display/US/Nimbus+-+Managing+a+VM+Cluster
 
->Note: You may need to update and upgrade first if pdsh isn’t in the package list, with
->sudo apt-get update -y
->sudo apt-get -yq upgrade
+Note: You may need to update and upgrade first if pdsh isn’t in the package list with 
+
+sudo apt-get update -y
+sudo apt-get -yq upgrade
 
 #### 2.	Install pdsh across all nodes:
 
