@@ -270,7 +270,7 @@ sudo systemctl enable slurmdbd
 sudo systemctl start slurmdbd
 sudo systemctl status slurmdbd
 ```
-### FINAL error checks:
+### FINAL error checks
 
 #### 1.	Check for any errors with SlurmDBD, SlurmCTLD and SlurmD:
 
@@ -340,76 +340,74 @@ grep 192.168 /etc/hosts
 ```
 #### 2.	Replace your IP addresses in the setup_NFS.sh script. The final mounted disk is on the master node (in this case node-0 with IP 192.168.0.57).
 
-	Note: If mounting the folders goes wrong and you end up with stale file handles, just soft reboot the instances and then you can remove the 	folders.
+Note: If mounting the folders goes wrong and you end up with stale file handles, just soft reboot the instances and then you can remove the 	folders.
 
-
-	Run:
-	```
-	bash ./setup_NFS.sh
-	```
+Run:
+```
+bash ./setup_NFS.sh
+```
 ### Installing essential applications
 
 #### 1.	Installation of Docker
 	
-	```
-	sudo apt install docker.io -y
-	pdsh -a sudo apt install docker.io -y
+```
+sudo apt install docker.io -y
+pdsh -a sudo apt install docker.io -y
 
-	sudo systemctl enable --now docker 
-	pdsh -a sudo systemctl enable --now docker
+sudo systemctl enable --now docker 
+pdsh -a sudo systemctl enable --now docker
 
-	sudo usermod -aG docker ubuntu
-	pdsh -a sudo usermod -aG docker ubuntu
-	```
+sudo usermod -aG docker ubuntu
+pdsh -a sudo usermod -aG docker ubuntu
+```
 
-	Then soft-reboot all the nodes
+Then soft-reboot all the nodes
 
 #### 2.	Installation of GO
 
-	```
-	sudo apt install golang -y
-
-	pdsh -a sudo apt install golang -y
-	```
+```
+sudo apt install golang -y
+	
+pdsh -a sudo apt install golang -y
+```
 
 #### 3.	Installation of Singularity
 
-	Install dependencies on all nodes:
+Install dependencies on all nodes:
 
-	Copy scripts singdep_per_node.sh and singdep.sh to your home directory		
+Copy scripts singdep_per_node.sh and singdep.sh to your home directory		
 
-	Run:
-	```
-	bash ./singdep.sh
-	```
+Run:
+```
+bash ./singdep.sh
+```
 
-	Checking out Singularity from GitHub on all nodes:
+Checking out Singularity from GitHub on all nodes:
 
-	Note: If updating to a different version of Singularity, first delete all executables with:
-	```
-	sudo rm -rf /usr/local/libexec/singularity
-	pdsh -a sudo rm -rf /usr/local/libexec/singularity
-	```
-	Decide on a release version from:
-		https://github.com/hpcng/singularity/releases
-		In this case we chose version 3.5.3
+Note: If updating to a different version of Singularity, first delete all executables with:
+```
+sudo rm -rf /usr/local/libexec/singularity
+pdsh -a sudo rm -rf /usr/local/libexec/singularity
+```
+Decide on a release version from:
+https://github.com/hpcng/singularity/releases
+In this case we chose version 3.5.3
 
-	Copy scripts singularity_per_node.sh and install_singularity.sh to your home directory and edit them as necessary with your choice of Singularity 	version
+Copy scripts singularity_per_node.sh and install_singularity.sh to your home directory and edit them as necessary with your choice of Singularity 	version
 
-	
-	Run:
-	```
-	bash ./install_singularity.sh
-	```
+Run:
+```
+bash ./install_singularity.sh
+```
 
 #### 4.	Compile Singularity:
 
-	Copy scripts compile_singularity_per_node.sh and compile_singularity.sh to your home directory
+Copy scripts compile_singularity_per_node.sh and compile_singularity.sh to your home directory
 
-	Run:
-	```
-	bash ./compile_singularity.sh
-	```
+Run:
+```
+bash ./compile_singularity.sh
+```
 
 ### Submitting jobs with SLURM
 
