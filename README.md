@@ -34,21 +34,22 @@ On your desktop set up ssh-agent and use ForwardAgent for forwarding on SSH cred
 After logging into node-0 ensure that all nodes are listed in hosts:
 
 Example:
+```
+cat /etc/hosts
+127.0.0.1 localhost
+192.168.0.57 node-0
+192.168.0.56 node-1
+192.168.0.65 node-2
+192.168.0.69 node-3
 
->cat /etc/hosts
->127.0.0.1 localhost
->192.168.0.57 node-0
->192.168.0.56 node-1
->192.168.0.65 node-2
->192.168.0.69 node-3
-
-># The following lines are desirable for IPv6 capable hosts
->::1 ip6-localhost ip6-loopback
->fe00::0 ip6-localnet
->ff00::0 ip6-mcastprefix
->ff02::1 ip6-allnodes
->ff02::2 ip6-allrouters
->ff02::3 ip6-allhosts
+# The following lines are desirable for IPv6 capable hosts
+::1 ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ff02::3 ip6-allhosts
+```
 </p>
 	
 #### 1.	Install pdsh as described here:
@@ -342,9 +343,11 @@ Errors can also be viewed in the log files:
 
 2.	Installation of GO
 
+	```
 	sudo apt install golang -y
 
 	pdsh -a sudo apt install golang -y
+	```
 
 3.	Installation of Singularity
 
@@ -352,14 +355,18 @@ Errors can also be viewed in the log files:
 
 		Copy scripts singdep_per_node.sh and singdep.sh to your home directory		
 
-		Run bash ./singdep.sh
+		Run:
+		```
+		bash ./singdep.sh
+		```
 
 	Checking out Singularity from GitHub on all nodes:
 
 	Note: If updating to a different version of Singularity, first delete all executables with:
-		sudo rm -rf /usr/local/libexec/singularity
-		pdsh -a sudo rm -rf /usr/local/libexec/singularity
-
+	```
+	sudo rm -rf /usr/local/libexec/singularity
+	pdsh -a sudo rm -rf /usr/local/libexec/singularity
+	```
 	Decide on a release version from:
 		https://github.com/hpcng/singularity/releases
 		In this case we chose version 3.5.3
@@ -367,7 +374,8 @@ Errors can also be viewed in the log files:
 	Copy scripts singularity_per_node.sh and install_singularity.sh to your home directory and edit them as necessary with your choice of Singularity 	version
 
 	
-	Run bash ./install_singularity.sh
+	Run:
+	```bash ./install_singularity.sh```
 
 4.	Compile Singularity:
 
@@ -379,20 +387,23 @@ Errors can also be viewed in the log files:
 
 Sbatch example (submit.sh):
 
->#!/bin/bash
->#SBATCH --nodes=3
-># allow use of all the memory on the node
->#SBATCH --ntasks-per-node=8
->#SBATCH --mem=0
-># request all CPU cores on the node
->#SBATCH --exclusive
-># Customize --partition as appropriate
->#SBATCH --partition=debug
->
->srun -n 24 ./my_program.py
+```
+#!/bin/bash
+#SBATCH --nodes=3
+# allow use of all the memory on the node
+#SBATCH --ntasks-per-node=8
+#SBATCH --mem=0
+# request all CPU cores on the node
+#SBATCH --exclusive
+# Customize --partition as appropriate
+#SBATCH --partition=debug
 
+srun -n 24 ./my_program.py
+```
 Running the job:
->sbatch submit.sh
+```
+sbatch submit.sh
+```
 
 In this example we are running the job across 3 nodes, each with 8 cores, totalling 24 processors.
 
