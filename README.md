@@ -20,7 +20,7 @@ Additional useful documentation:
 
 ### Initial setup
 
-Prepare clusters according to: https://support.pawsey.org.au/documentation/display/US/Manage+an+Instance+Cluster.
+Prepare clusters according to: [https://support.pawsey.org.au/documentation/display/US/Manage+an+Instance+Cluster](Pawsey Managing Instances).
 
 Create a cluster called “node”, which will create multiple nodes at once and name them as node-1, -2 etc. Multiple can be setup at the same time. Then create one additional node as node-0 as the master node. 
 
@@ -47,7 +47,7 @@ ff02::3 ip6-allhosts
 ```
 	
 #### 1.	Install pdsh as described here:
-[Pawsey Nimbus Management](https://support.pawsey.org.au/documentation/display/US/Nimbus+-+Managing+a+VM+Cluster)
+[Pawsey Nimbus VM Cluster Management](https://support.pawsey.org.au/documentation/display/US/Nimbus+-+Managing+a+VM+Cluster)
 
 Note: You may need to update and upgrade first if pdsh isn’t in the package list with 
 ```
