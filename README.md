@@ -532,3 +532,5 @@ Running the job:
 sbatch submit.sh
 
 In this example we are running the job across 3 nodes, each with 8 cores, totalling 24 processors.
+
+Note: If at any time job output stops appearing in the /data directory, it may be that the shared /data folders are no longer mounted. Therefore, rerun the setup_NFS.sh script again.
