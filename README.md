@@ -112,7 +112,7 @@ It is critical to correctly name the master node and the worker nodes. These nam
 
 Make sure the number of CPUs, main memory etc are set correctly for each worker node. If you are unsure how to set these install the slurm daemon on a node: 
 
-ssh into one of the worker nodes and then (e.g. ssh node-1):
+ssh into one of the worker nodes (e.g. ssh node-1) and then:
 
 sudo apt-get install -yq slurmd
 
