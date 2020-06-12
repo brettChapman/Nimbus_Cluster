@@ -98,9 +98,7 @@ sudo apt install slurm-wlm-doc
 
 Download documents from master node:
 
-scp ubuntu@X:/usr/share/doc/slurm-wlm-doc/html/configurator.html ./
-
-Where X=master node IP where the documents are.
+scp ubuntu@X:/usr/share/doc/slurm-wlm-doc/html/configurator.html ./ (where X=master node IP where the documents are).
 
 Note: Depending on the Slurm version, the configurator may be in /usr/share/doc/slurm-wlm/html/.
 
@@ -120,6 +118,7 @@ and then run:
 
 slurmd -C
 
+##### Set up the following in the config file:
 
 1.	Set ControlMachine to node-0 (if the master node is named as such)
 2.	Set NodeName to node-[1-3] (if named and numbered as such)
@@ -149,74 +148,15 @@ Finally copy the output of the configurator webpage into a file called slurm.con
 3.	Copy hosts to home directory of all nodes
 pdcp -a /etc/hosts ~/
 
-4.	Set up the following scripts:
+4.	Copy and run the following scripts:
 
-Create script “setup_host_for_slurm.sh”
-sudo apt-get install slurm-client
+Copy scripts setup_host_for_slurm.sh and install_slurm.sh to your home directory
 
-sudo mv ~/hosts /etc/
-sudo mkdir -p /etc/slurm-llnl
-sudo mkdir -p /var/spool/slurm-llnl
-sudo mkdir -p /var/spool/slurmd
-sudo mkdir -p /var/log/slurm-llnl
-sudo touch /var/log/slurm-llnl/slurmctld.log
-sudo touch /var/log/slurm-llnl/slurmd.log
-sudo touch /var/log/slurm-llnl/slurmdbd.log
-
-sudo -- sh -c "cat > /etc/slurm-llnl/cgroup.conf << 'EOF'
-CgroupAutomount=yes
-ConstrainCores=yes
-ConstrainDevices=yes
-ConstrainRAMSpace=yes"
-
-sudo mv ~/slurm.conf /etc/slurm-llnl/slurm.conf
-sudo chown slurm:slurm /etc/slurm-llnl/slurm.conf
-sudo chown slurm:slurm /var/spool/slurm-llnl
-sudo chown slurm:slurm /var/spool/slurmd
-sudo chown slurm:slurm /var/log/slurm-llnl
-sudo chown slurm:slurm /var/log/slurm-llnl/slurmctld.log
-sudo chown slurm:slurm /var/log/slurm-llnl/slurmd.log
-sudo chown slurm:slurm /var/log/slurm-llnl/slurmdbd.log
-sudo chown slurm:slurm /etc/slurm-llnl/cgroup.conf
-
-The following script configures the master node, copies the above script to all nodes and configures them. It is expected that the slurm.conf file is in the home directory of user ubuntu.
-
-Create script “install_slurm.sh”
-sudo apt-get install slurmctld slurmdbd
-sudo apt-get install mailutils -yq
-pdsh -a sudo apt-get update
-pdsh -a sudo apt-get -yq upgrade
-pdsh -a sudo apt-get -yq install slurmd pdsh
-pdcp -a slurm.conf ~/slurm.conf
-pdcp -a setup_host_for_slurm.sh ~/setup_host_for_slurm.sh
-pdsh -a bash ./setup_host_for_slurm.sh
-sudo mkdir -p /etc/slurm-llnl
-sudo mv ~/slurm.conf /etc/slurm-llnl/slurm.conf
-sudo chown slurm:slurm /etc/slurm-llnl/slurm.conf
-sudo mkdir -p /var/spool/slurm-llnl
-sudo chown slurm:slurm /var/spool/slurm-llnl
-sudo mkdir -p /var/spool/slurmd
-sudo chown slurm:slurm /var/spool/slurmd
-sudo mkdir -p /var/log/slurm-llnl
-sudo touch /var/log/slurm-llnl/slurmctld.log
-sudo touch /var/log/slurm-llnl/slurmd.log
-sudo touch /var/log/slurm-llnl/slurmdbd.log
-sudo chown slurm:slurm /var/log/slurm-llnl
-sudo chown slurm:slurm /var/log/slurm-llnl/slurmctld.log
-sudo chown slurm:slurm /var/log/slurm-llnl/slurmd.log
-sudo chown slurm:slurm /var/log/slurm-llnl/slurmdbd.log
-
-sudo -- sh -c "cat > /etc/slurm-llnl/cgroup.conf << 'EOF'
-CgroupAutomount=yes
-ConstrainCores=yes
-ConstrainDevices=yes
-ConstrainRAMSpace=yes"
-
-sudo chown slurm:slurm /etc/slurm-llnl/cgroup.conf
+The install_slurm.sh script configures the master node, copies the setup_host_for_slurm.sh script to all nodes and configures them. It is expected that the slurm.conf file is in the home directory of user ubuntu.
 
 Run bash ./install_slurm.sh
 
-MariaDB and MySQL setup
+### MariaDB and MySQL setup
 
 1.	Enable SlurmDBD:
 
@@ -273,29 +213,29 @@ sudo mysql -p (enter chosen password)
 
 MariaDB> SHOW VARIABLES LIKE 'innodb_buffer_pool_size';
 
-SLURMDBD setup
+### SLURMDBD setup
 
 1.	Create SlurmDBD config file:
 
 zcat /usr/share/doc/slurmdbd/examples/slurmdbd.conf.simple.gz > slurmdbd.conf
 
-Edit the slurmdbd.conf file: sudo vim slurmdbd.conf
+Edit the slurmdbd.conf file (sudo vim slurmdbd.conf) set the following:
 
-Set DbdHost to localhost
-Set StorageHost to localhost
-Set StorageLoc to slurm_acct_db
-Set StoragePass to password (or whatever password was chosen to access MariaDB)
-Set StorageType to accounting_storage/mysql
-Set StorageUser to slurm
-Set LogFile to /var/log/slurm-llnl/slurmdbd.log
-Set PidFile to /var/run/slurmdbd.pid
-Set SlurmUser to slurm
+1. Set DbdHost to localhost
+2. Set StorageHost to localhost
+3. Set StorageLoc to slurm_acct_db
+4. Set StoragePass to password (or whatever password was chosen to access MariaDB)
+5. Set StorageType to accounting_storage/mysql
+6. Set StorageUser to slurm
+7. Set LogFile to /var/log/slurm-llnl/slurmdbd.log
+8. Set PidFile to /var/run/slurmdbd.pid
+9. Set SlurmUser to slurm
 
 2.	Move the slurmdbd.conf to the slurm directory:
 
 sudo mv slurmdbd.conf /etc/slurm-llnl/
 
-3.	Set permissions and owner:
+3.	Set permissions and ownership:
 
 sudo chown slurm:slurm /etc/slurm-llnl/slurmdbd.conf
 sudo chmod 664 /etc/slurm-llnl/slurmdbd.conf
@@ -317,202 +257,125 @@ sudo systemctl enable slurmdbd
 sudo systemctl start slurmdbd
 sudo systemctl status slurmdbd
 
-FINAL error checks:
+### FINAL error checks:
 
 1.	Check for any errors with SlurmDBD, SlurmCTLD and SlurmD:
 
 Check SlurmDBD for errors:
-sudo slurmdbd -D -vvv
+	sudo slurmdbd -D -vvv
 
 Check SlurmCTLD for errors:
-sudo slurmctld -Dcvvv
+	sudo slurmctld -Dcvvv
 
 Check SlurmD for errors (start-up services first):
-sudo systemctl enable slurmdbd
-sudo systemctl start slurmdbd
-sudo systemctl status slurmdbd
+	sudo systemctl enable slurmdbd
+	sudo systemctl start slurmdbd
+	sudo systemctl status slurmdbd
 
-sudo systemctl stop slurmctld
-sudo systemctl start slurmctld
+	sudo systemctl stop slurmctld
+	sudo systemctl start slurmctld
 
-pdsh -a sudo systemctl stop slurmd
-pdsh -a sudo systemctl enable slurmd
-pdsh -a sudo slurmd
+	pdsh -a sudo systemctl stop slurmd
+	pdsh -a sudo systemctl enable slurmd
+	pdsh -a sudo slurmd
 
-pdsh -a sudo slurmd -Dcvvv
+	pdsh -a sudo slurmd -Dcvvv
 
 Errors can also be viewed in the log files:
 
-sudo cat /var/log/slurm-llnl/slurmctld.log | less -S
-sudo cat /var/log/slurm-llnl/slurmdbd.log | less -S
-pdsh -a sudo cat /var/log/slurm-llnl/slurmd.log | less -S
+	sudo cat /var/log/slurm-llnl/slurmctld.log | less -S
+	sudo cat /var/log/slurm-llnl/slurmdbd.log | less -S
+	pdsh -a sudo cat /var/log/slurm-llnl/slurmd.log | less -S
 	
-FINAL Start SLURMDB, SLURMCTLD and SLURMD services
+### FINAL Start SLURMDB, SLURMCTLD and SLURMD services
 
-sudo systemctl enable slurmdbd
-sudo systemctl start slurmdbd
-sudo systemctl status slurmdbd
+	sudo systemctl enable slurmdbd
+	sudo systemctl start slurmdbd
+	sudo systemctl status slurmdbd
 
-sudo systemctl stop slurmctld
-sudo systemctl start slurmctld
+	sudo systemctl stop slurmctld
+	sudo systemctl start slurmctld
 
-pdsh -a sudo systemctl stop slurmd
-pdsh -a sudo systemctl enable slurmd
-pdsh -a sudo slurmd
+	pdsh -a sudo systemctl stop slurmd
+	pdsh -a sudo systemctl enable slurmd
+	pdsh -a sudo slurmd
 
-Note: You should now be able to run the following commands with no problems:
-sinfo (displays node information)
-sacct (requires SlurmDBD and shows previous or running jobs)
-scontrol show jobs (shows details of currently running jobs)
-scontrol ping (pings slurmctld and shows its status)
+	Note: You should now be able to run the following commands with no problems:
+	sinfo (displays node information)
+	sacct (requires SlurmDBD and shows previous or running jobs)
+	scontrol show jobs (shows details of currently running jobs)
+	scontrol ping (pings slurmctld and shows its status)
 
-Note: I successfully ran Slurm with Ubuntu 20.04 LTS and Slurm version 19.05.5 (for some reason the Slurm controller appears to only fail when using the Pawsey custom built Ubuntu images).
+### **Note: I successfully ran Slurm with Ubuntu 20.04 LTS and Slurm version 19.05.5 (for some reason the Slurm controller appears to only fail when using the Pawsey custom built Ubuntu images).**
 
-Setup NFS data volume
+### Setup NFS data volume
 
 1.	Look in /etc/hosts on the master node (node-0 in this case):
 
-grep 192.168 /etc/hosts
-192.168.0.57 node-0
-192.168.0.56 node-1
-192.168.0.65 node-2
-192.168.0.69 node-3
+	>grep 192.168 /etc/hosts
+	>192.168.0.57 node-0
+	>192.168.0.56 node-1
+	>192.168.0.65 node-2
+	>192.168.0.69 node-3
 
-2.	Replace your IP addresses in the following script. The final mounted disk is on the master node (in this case node-0 with IP 192.168.0.57).
+2.	Replace your IP addresses in the setup_NFS.sh script. The final mounted disk is on the master node (in this case node-0 with IP 192.168.0.57).
 
-Note: If mounting the folders goes wrong and you end up with stale file handles, just soft reboot the instances and then you can remove the folders.
+	Note: If mounting the folders goes wrong and you end up with stale file handles, just soft reboot the instances and then you can remove the 	folders.
 
-Create script “setup_NFS.sh”
-sudo mkdir /data
 
-pdsh -a sudo apt-get -yq install nfs-common
-sudo apt-get install -yq rpcbind nfs-kernel-server
+	Run bash ./setup_NFS.sh
 
-sudo -- sh -c "cat > /etc/exports << 'EOF'
-/data 192.168.0.56(rw,sync,no_subtree_check)
-/data 192.168.0.65(rw,sync,no_subtree_check)
-/data 192.168.0.69(rw,sync,no_subtree_check)"
-
-sudo /etc/init.d/rpcbind restart
-sudo /etc/init.d/nfs-kernel-server restart
-sudo exportfs -r
-
-pdsh -a sudo mkdir /data
-pdsh -a sudo chown -R ubuntu:ubuntu /data
-pdsh -a sudo mount 192.168.0.57:/data /data
-
-pdsh -a ls /data
-sudo chown -R ubuntu:ubuntu /data
-
-Run bash ./setup_NFS.sh
-
-Installing essential applications
+### Installing essential applications
 
 1.	Installation of Docker
 
-sudo apt install docker.io -y
-pdsh -a sudo apt install docker.io -y
+	sudo apt install docker.io -y
+	pdsh -a sudo apt install docker.io -y
 
-sudo systemctl enable --now docker 
-pdsh -a sudo systemctl enable --now docker
+	sudo systemctl enable --now docker 
+	pdsh -a sudo systemctl enable --now docker
 
-sudo usermod -aG docker ubuntu
-pdsh -a sudo usermod -aG docker ubuntu
+	sudo usermod -aG docker ubuntu
+	pdsh -a sudo usermod -aG docker ubuntu
 
-Then soft-reboot all the nodes
+	Then soft-reboot all the nodes
 
 2.	Installation of GO
 
-sudo apt install golang -y
+	sudo apt install golang -y
 
-pdsh -a sudo apt install golang -y
+	pdsh -a sudo apt install golang -y
 
 3.	Installation of Singularity
 
-Install dependencies on all nodes:
+	Install dependencies on all nodes:
 
-		Create script “singdep_per_node.sh”
-sudo apt-get update && sudo apt-get install -y \
-    	build-essential \
-    	libssl-dev \
-    	uuid-dev \
-    	libgpgme11-dev \
-    	squashfs-tools \
-    	libseccomp-dev \
-    	wget \
-    	pkg-config \
-    	git
+		Copy scripts singdep_per_node.sh and singdep.sh to your home directory		
 
-Create script “singdep.sh”
-pdcp -a singdep_per_node.sh ~/
+		Run bash ./singdep.sh
 
-sudo apt-get update && sudo apt-get install -y \
-    		build-essential \
-    		libssl-dev \
-    		uuid-dev \
-    		libgpgme11-dev \
-    		squashfs-tools \
-    		libseccomp-dev \
-    		wget \
-    		pkg-config \
-    		git
+	Checking out Singularity from GitHub on all nodes:
 
-pdsh -a bash ./singdep_per_node.sh
+	Note: If updating to a different version of Singularity, first delete all executables with:
+		sudo rm -rf /usr/local/libexec/singularity
+		pdsh -a sudo rm -rf /usr/local/libexec/singularity
 
-Run bash ./singdep.sh
+	Decide on a release version from:
+		https://github.com/hpcng/singularity/releases
+		In this case we chose version 3.5.3
 
-Checking out Singularity from GitHub on all nodes:
+	Copy scripts singularity_per_node.sh and install_singularity.sh to your home directory and edit them as necessary with your choice of Singularity 	version
 
-Note: If updating to a different version of Singularity, first delete all executables with:
-sudo rm -rf /usr/local/libexec/singularity
-pdsh -a sudo rm -rf /usr/local/libexec/singularity
-
-Decide on a release version from:
-https://github.com/hpcng/singularity/releases
-In this case we chose version 3.5.3
-
-Create script “singularity_per_node.sh”
-cd ~
-sudo git clone https://github.com/hpcng/singularity.git
-cd singularity
-sudo git checkout v3.5.3
-
-Create script “install_singularity.sh”
-pdcp -a ~/singularity_per_node.sh ~/
-cd ~
-sudo git clone https://github.com/hpcng/singularity.git
-cd singularity
-sudo git checkout v3.5.3
-cd ~
-
-pdsh -a bash ./singularity_per_node.sh
 	
-Run bash ./install_singularity.sh
+	Run bash ./install_singularity.sh
 
 4.	Compile Singularity:
 
-Create script “compile_singularity_per_node.sh”
-cd ~/singularity
-sudo ./mconfig
-sudo make -C ./builddir
-sudo make -C ./builddir install
-cd ~
-sudo rm -dr ~/singularity
+	Copy scripts compile_singularity_per_node.sh and compile_singularity.sh to your home directory
 
-Create script “compile_singularity.sh”
-pdcp -a compile_singularity_per_node.sh ~/
+	Run bash ./compile_singularity.sh
 
-cd ~/singularity
-sudo ./mconfig
-sudo make -C ./builddir
-sudo make -C ./builddir install
-pdsh -a bash ./compile_singularity_per_node.sh
-cd ~
-sudo rm -dr ~/singularity
-
-Run bash ./compile_singularity.sh
-
-Submitting jobs with SLURM
+### Submitting jobs with SLURM
 
 Sbatch example (submit.sh):
 
