@@ -21,7 +21,7 @@ https://wiki.fysik.dtu.dk/niflheim/Slurm_database
 
 ## Setting up the cluster
 
-## Initial setup
+### Initial setup
 
 <p align="justify">
 Prepare clusters according to:
@@ -35,36 +35,36 @@ After logging into node-0 ensure that all nodes are listed in hosts:
 
 Example:
 
-cat /etc/hosts
-127.0.0.1 localhost
-192.168.0.57 node-0
-192.168.0.56 node-1
-192.168.0.65 node-2
-192.168.0.69 node-3
+>cat /etc/hosts
+>127.0.0.1 localhost
+>192.168.0.57 node-0
+>192.168.0.56 node-1
+>192.168.0.65 node-2
+>192.168.0.69 node-3
 
-# The following lines are desirable for IPv6 capable hosts
-::1 ip6-localhost ip6-loopback
-fe00::0 ip6-localnet
-ff00::0 ip6-mcastprefix
-ff02::1 ip6-allnodes
-ff02::2 ip6-allrouters
-ff02::3 ip6-allhosts
+># The following lines are desirable for IPv6 capable hosts
+>::1 ip6-localhost ip6-loopback
+>fe00::0 ip6-localnet
+>ff00::0 ip6-mcastprefix
+>ff02::1 ip6-allnodes
+>ff02::2 ip6-allrouters
+>ff02::3 ip6-allhosts
 </p>
 	
-## 1.	Install pdsh as described here:
+#### 1.	Install pdsh as described here:
 https://support.pawsey.org.au/documentation/display/US/Nimbus+-+Managing+a+VM+Cluster
 
-Note: You may need to update and upgrade first if pdsh isn’t in the package list, with
-sudo apt-get update -y
-sudo apt-get -yq upgrade
+>Note: You may need to update and upgrade first if pdsh isn’t in the package list, with
+>sudo apt-get update -y
+>sudo apt-get -yq upgrade
 
-## 2.	Install pdsh across all nodes:
+#### 2.	Install pdsh across all nodes:
 
 pdsh -a sudo apt-get update -y
 pdsh -a sudo apt-get -yq upgrade
 pdsh -a sudo apt-get install pdsh -y
 
-## 3.	Ensure all the nodes are updated and upgraded if not already done:
+#### 3.	Ensure all the nodes are updated and upgraded if not already done:
 
 sudo apt-get update -y
 sudo apt-get -yq upgrade
@@ -72,46 +72,27 @@ sudo apt-get -yq upgrade
 pdsh -a sudo apt-get update
 pdsh -a sudo apt-get -yq upgrade
 
-## MUNGE setup
+### MUNGE setup
 
-## 1.	Install dependencies and MUNGE:
+#### 1.	Install dependencies and MUNGE:
 sudo apt-get -yq install libmunge-dev libmunge2 munge
 pdsh -a sudo apt-get -yq install libmunge-dev libmunge2 munge
 
-## 2.	Sync munge key across all nodes:
+#### 2.	Sync munge key across all nodes:
 
-Create script “munge_per_node.sh”
-sudo systemctl stop munge
-cd ~
-sudo chown munge: munge.key
-sudo mv munge.key /etc/munge/munge.key
-sudo chmod 400 /etc/munge/munge.key
-sudo systemctl enable munge
-sudo systemctl start munge
-
-Create script “distribute_munge.sh”
-dd if=/dev/urandom of=~/munge.key bs=1c count=4M
-pdcp -a munge.key ~/munge.key
-pdcp -a munge_per_node.sh ~/munge_per_node.sh
-pdsh -a bash ./munge_per_node.sh
-sudo systemctl stop munge
-sudo chown munge: munge.key
-sudo mv munge.key /etc/munge/munge.key
-sudo chmod 400 /etc/munge/munge.key
-sudo systemctl enable munge
-sudo systemctl start munge
+Copy scripts munge_per_node.sh and distribute_munge.sh to your home directory
 
 Run bash ./distribute_munge.sh
 
-3.	Check Munge is installed and running on all nodes:
+#### 3.	Check Munge is installed and running on all nodes:
 systemctl status munge
 pdsh -a systemctl status munge
 
-SLURM setup
+### SLURM setup
 
 Generate a Slurm config file following instructions here: https://slurm.schedmd.com/configurator.html. Ensure that the Slurm version you’re going to use will be the same as the public configurator (check with “sudo apt search slurm”). Otherwise install on your master node and download the following:
 
-1.	Install configurator on your master node:
+#### 1.	Install configurator on your master node:
 sudo apt install slurm-wlm-doc
 
 Download documents from master node:
@@ -124,7 +105,7 @@ Note: Depending on the Slurm version, the configurator may be in /usr/share/doc/
 
 Open the configurator in your browser
 
-2.	Generating a config file:
+#### 2.	Generating a config file:
 
 It is critical to correctly name the master node and the worker nodes. These names have to match exactly what is shown in the OpenStack online management console.
 
