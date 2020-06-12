@@ -1,10 +1,10 @@
 # README.md - `Nimbus Cluster`
 
-This repository contains instructions and scripts for setting up a Nimbus Cluster using Slurm (https://nimbus.pawsey.org.au/).
+This repository contains instructions and scripts for setting up a Nimbus Cluster using Slurm ([https://nimbus.pawsey.org.au/](https://nimbus.pawsey.org.au/)).
 
 Additional useful documentation:
 
-https://github.com/TimoLassmann/dot-files/blob/master/additional/setup_nimbus_cluster.org
+[https://github.com/TimoLassmann/dot-files/blob/master/additional/setup_nimbus_cluster.org](https://github.com/TimoLassmann/dot-files/blob/master/additional/setup_nimbus_cluster.org)
 
 https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=2ahUKEwic07CrssbpAhWl4HMBHQylDnIQFjAAegQIBRAB&url=ftp%3A%2F%2Fmicroway.com%2Fpub%2Ffor-customer%2FSDSU-Training%2FWebinar_2_Slurm_II--Ubuntu16.04_and_18.04.pdf&usg=AOvVaw3TaEKxv9Iqe5qDUCp1GjQX
 
@@ -20,8 +20,7 @@ https://wiki.fysik.dtu.dk/niflheim/Slurm_database
 
 ### Initial setup
 
-Prepare clusters according to:
-https://support.pawsey.org.au/documentation/display/US/Manage+an+Instance+Cluster
+Prepare clusters according to: https://support.pawsey.org.au/documentation/display/US/Manage+an+Instance+Cluster.
 
 Create a cluster called “node”, which will create multiple nodes at once and name them as node-1, -2 etc. Multiple can be setup at the same time. Then create one additional node as node-0 as the master node. 
 
@@ -116,28 +115,28 @@ slurmd -C
 
 ##### Set up the following in the config file:
 
-1.	Set ControlMachine to node-0 (if the master node is named as such)
-2.	Set NodeName to node-[1-3] (if named and numbered as such)
-3.	Set SlurmUser to slurm
-4.	Set StateSaveLocation to /var/spool/slurm-llnl
-5.	Set Process Tracking to Cgroup
-6.	Set Task Launch to Cgroup
-7.	Set Event Logging SlurmctldLogFile to /var/log/slurm-llnl/slurmctld.log
-8.	Set Event Logging SlurmdLogFile to /var/log/slurm-llnl/slurmd.log
-9.	Set Process ID Logging SlurmctldPidFile to /var/run/slurmctld.pid
-10.	Set Process ID Logging SlurmdPidFile to /var/run/slurmd.pid
+- Set ControlMachine to node-0 (if the master node is named as such)
+- Set NodeName to node-[1-3] (if named and numbered as such)
+- Set SlurmUser to slurm
+- Set StateSaveLocation to /var/spool/slurm-llnl
+- Set Process Tracking to Cgroup
+- Set Task Launch to Cgroup
+- Set Event Logging SlurmctldLogFile to /var/log/slurm-llnl/slurmctld.log
+- Set Event Logging SlurmdLogFile to /var/log/slurm-llnl/slurmd.log
+- Set Process ID Logging SlurmctldPidFile to /var/run/slurmctld.pid
+- Set Process ID Logging SlurmdPidFile to /var/run/slurmd.pid
 
 The below settings are for configuring SlurmDBD and are optional (they can be left out if SlurmDBD is not needed or for debugging purposes, and added in later)
 
-11.	Set Job Completion Logging to MySQL
-12.	Set JobCompLoc to slurm_acct_db
-13.	Set JonCompHost to localhost
-14.	Set JobCompUser to slurm
-15.	Set JobCompPass to password (or whatever password was chosen for MariaDB)
-16.	Set Accounting Gather to None
-17.	Set Job Accounting Storage to FileTxt
+- Set Job Completion Logging to MySQL
+- Set JobCompLoc to slurm_acct_db
+- Set JonCompHost to localhost
+- Set JobCompUser to slurm
+- Set JobCompPass to password (or whatever password was chosen for MariaDB)
+- Set Accounting Gather to None
+- Set Job Accounting Storage to FileTxt
 
-18.	All other settings can be left as default.
+- All other settings can be left as default.
 
 Finally copy the output of the configurator webpage into a file called slurm.conf and send a copy to the home directory of your master node (simply copying and pasting into the file works best to preserve formatting). 
 
