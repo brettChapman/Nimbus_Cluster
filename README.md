@@ -441,8 +441,12 @@ In this example we are running the job across 3 nodes, each with 8 cores, totall
 - If at any time job output stops appearing in the /data directory, it may be that the shared /data folders are no longer mounted. Therefore, rerun the setup_NFS.sh script again. Also periodically check that Munge and all the Slurm services are currently running, if they aren’t try rerunning the scripts, and if all else fails, hard-reboot all nodes and re-initialise all the services.
 
 
-- If after a reboot or power outage your worker nodes remain down, which can be seen by running ```sinfo```, run the following (amend to the number of worker nodes):
+- If after a reboot or power outage your worker nodes remain down and slurmd remains inactive, which can be seen by running ```sinfo``` and ```pdsh -a sudo systemctl status slurmd```, run the following (amend to the number of worker nodes):
 
 ```
 for i in {1..3}; do sudo scontrol update NodeName=node-$i state=idle; done
+
+sudo service slurmctld restart
+
+pdsh -a sudo service slurmd restart
 ```
