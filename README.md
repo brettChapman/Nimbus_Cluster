@@ -22,7 +22,7 @@ Disclaimer: This is my first time setting up a cluster with Slurm. If you have m
 
 Prepare clusters according to: [Pawsey Managing Instances](https://support.pawsey.org.au/documentation/display/US/Manage+an+Instance+Cluster).
 
-Create a cluster called “node”, which will create multiple nodes at once and name them as node-1, -2 etc. Multiple can be setup at the same time. Then create one additional node as node-0 as the master node. 
+Create a cluster called “node”, which can create multiple nodes at once and name them as node-1, -2 etc after you select how many instances you want. Then create one additional node as node-0 as the master node.
 
 On your desktop set up ssh-agent and use ForwardAgent for forwarding on SSH credentials and ensure your Nimbus SSH credentials are set up for ssh-agent in your bash_profile or bashrc script as well. Added like so: ssh-add ~/.ssh/Nimbus.pem
 
@@ -47,9 +47,9 @@ ff02::3 ip6-allhosts
 ```
 	
 #### 1.	Install pdsh as described here:
-[Pawsey Nimbus VM Cluster Management](https://support.pawsey.org.au/documentation/display/US/Nimbus+-+Managing+a+VM+Cluster)
+[Pawsey Managing Instances](https://support.pawsey.org.au/documentation/display/US/Manage+an+Instance+Cluster).
 
-Note: You may need to update and upgrade first if pdsh isn’t in the package list with 
+Note: You may need to update and upgrade first if pdsh isn’t in the package list with.
 ```
 sudo apt-get update -y
 sudo apt-get -yq upgrade
@@ -77,7 +77,7 @@ pdsh -a sudo apt-get -yq install libmunge-dev libmunge2 munge
 ```
 #### 2.	Sync munge key across all nodes:
 
-Copy scripts munge_per_node.sh and distribute_munge.sh to your home directory
+Copy scripts munge_per_node.sh and distribute_munge.sh to your home directory.
 
 Run:
 ```
@@ -93,8 +93,9 @@ pdsh -a systemctl status munge
 Generate a Slurm config file following instructions here: https://slurm.schedmd.com/configurator.html. Ensure that the Slurm version you’re going to use will be the same as the public configurator (check with “sudo apt search slurm”). Otherwise install on your master node and download the following:
 
 #### 1.	Install configurator on your master node:
+'''
 sudo apt install slurm-wlm-doc
-
+'''
 Download documents from master node:
 ```
 scp ubuntu@X:/usr/share/doc/slurm-wlm-doc/html/configurator.html ./
@@ -103,13 +104,13 @@ scp ubuntu@X:/usr/share/doc/slurm-wlm-doc/html/configurator.html ./
 ```
 Note: Depending on the Slurm version, the configurator may be in /usr/share/doc/slurm-wlm/html/.
 
-Open the configurator in your browser
+Open the configurator in your browser.
 
 #### 2.	Generating a config file:
 
 It is critical to correctly name the master node and the worker nodes. These names have to match exactly what is shown in the OpenStack online management console.
 
-Make sure the number of CPUs, main memory etc are set correctly for each worker node. If you are unsure how to set these install the slurm daemon on a node: 
+Make sure the number of CPUs, main memory etc are set correctly for each worker node. If you are unsure of what these values are install the slurm daemon on a node to check: 
 
 ssh into one of the worker nodes (e.g. ssh node-1) and then:
 ```
@@ -152,7 +153,7 @@ pdcp -a /etc/hosts ~/
 ```
 #### 4.	Copy and run the following scripts:
 
-Copy scripts setup_host_for_slurm.sh and install_slurm.sh to your home directory
+Copy scripts setup_host_for_slurm.sh and install_slurm.sh to your home directory.
 
 The install_slurm.sh script configures the master node, copies the setup_host_for_slurm.sh script to all nodes and configures them. It is expected that the slurm.conf file is in the home directory of user ubuntu.
 
@@ -377,7 +378,7 @@ pdsh -a sudo apt install golang -y
 
 Install dependencies on all nodes:
 
-Copy scripts singdep_per_node.sh and singdep.sh to your home directory		
+Copy scripts singdep_per_node.sh and singdep.sh to your home directory.	
 
 Run:
 ```
@@ -434,4 +435,4 @@ sbatch submit.sh
 
 In this example we are running the job across 3 nodes, each with 8 cores, totalling 24 processors.
 
-Note: If at any time job output stops appearing in the /data directory, it may be that the shared /data directories are no longer mounted. Therefore, rerun the setup_NFS.sh script again.
+Note: If at any time job output stops appearing in the /data directory, it may be that the shared /data folders are no longer mounted. Therefore, rerun the setup_NFS.sh script again. Also periodically check that Munge and all the Slurm services are currently running, if they aren’t try rerunning the scripts, and if all else fails, hard-reboot all nodes and re-initialise all the services.
