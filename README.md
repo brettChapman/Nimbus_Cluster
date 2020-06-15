@@ -90,7 +90,7 @@ pdsh -a systemctl status munge
 ```
 ### SLURM setup
 
-Generate a Slurm config file following instructions here: [https://slurm.schedmd.com/configurator.html[(https://slurm.schedmd.com/configurator.html). Ensure that the Slurm version you’re going to use will be the same as the public configurator (check with “sudo apt search slurm”). Otherwise install on your master node and download the following:
+Generate a Slurm config file following instructions here: [https://slurm.schedmd.com/configurator.html](https://slurm.schedmd.com/configurator.html). Ensure that the Slurm version you’re going to use will be the same as the public configurator (check with “sudo apt search slurm”). Otherwise install on your master node and download the following:
 
 #### 1.	Install configurator on your master node:
 ```
