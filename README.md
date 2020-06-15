@@ -93,9 +93,9 @@ pdsh -a systemctl status munge
 Generate a Slurm config file following instructions here: https://slurm.schedmd.com/configurator.html. Ensure that the Slurm version you’re going to use will be the same as the public configurator (check with “sudo apt search slurm”). Otherwise install on your master node and download the following:
 
 #### 1.	Install configurator on your master node:
-'''
+```
 sudo apt install slurm-wlm-doc
-'''
+```
 Download documents from master node:
 ```
 scp ubuntu@X:/usr/share/doc/slurm-wlm-doc/html/configurator.html ./
