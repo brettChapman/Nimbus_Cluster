@@ -127,22 +127,22 @@ slurmd -C
 - Set NodeName to node-[1-3] (if named and numbered as such)
 - Set SlurmUser to slurm
 - Set StateSaveLocation to /var/spool/slurm-llnl
-- Set Process Tracking to Cgroup
-- Set Task Launch to Cgroup
-- Set Event Logging SlurmctldLogFile to /var/log/slurm-llnl/slurmctld.log
-- Set Event Logging SlurmdLogFile to /var/log/slurm-llnl/slurmd.log
-- Set Process ID Logging SlurmctldPidFile to /var/run/slurmctld.pid
-- Set Process ID Logging SlurmdPidFile to /var/run/slurmd.pid
+- Set ProctrackType to Cgroup
+- Set TaskPlugin to Cgroup
+- Set SlurmctldLogFile to /var/log/slurm-llnl/slurmctld.log
+- Set SlurmdLogFile to /var/log/slurm-llnl/slurmd.log
+- Set SlurmctldPidFile to /var/run/slurmctld.pid
+- Set SlurmdPidFile to /var/run/slurmd.pid
 
 ##### The below settings are for configuring SlurmDBD and are optional (they can be left out if SlurmDBD is not needed or for debugging purposes, and added in later)
 
-- Set Job Completion Logging to MySQL
+- Set JobCompType to MySQL
 - Set JobCompLoc to slurm_acct_db
-- Set JonCompHost to localhost
+- Set JobCompHost to localhost
 - Set JobCompUser to slurm
 - Set JobCompPass to password (or whatever password was chosen for MariaDB)
-- Set Accounting Gather to None
-- Set Job Accounting Storage to FileTxt
+- Set JobAcctGatherType to None
+- Set AccountingStorageType to FileTxt
 - All other settings can be left as default.
 
 Finally copy the output of the configurator webpage into a file called slurm.conf and send a copy to the home directory of your master node (simply copying and pasting into the file works best to preserve formatting). 
