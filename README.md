@@ -469,7 +469,6 @@ sbatch submit_1.sh
 200
 sbatch --dependency=afterok:200 submit_2.sh
 ```
-
 Example using the dependency parameter with multiple jobs in a bash script:
 ```
 #!/bin/bash
@@ -488,4 +487,4 @@ job4=$(sbatch --dependency=afterok:$job2 submit_4.sh)
 job5=$(sbatch  --dependency=afterok:$job3:$job4 submit_5.sh)
 ```
 
-See the [https://slurm.schedmd.com/sbatch.html](sbatch) user page for more information and don't be afraid to look around online for other ideas to become familiar with the usage of different slurm commands.
+See the [sbatch](https://slurm.schedmd.com/sbatch.html) user page for more information and don't be afraid to look around online for other ideas to become familiar with the usage of different slurm commands.
