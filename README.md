@@ -460,7 +460,6 @@ Example using the begin parameter:
 ```
 sbatch --begin=now submit_1.sh
 sbatch --begin=now+12hours submit_2.sh
-
 ```
 
 Example using the dependency parameter:
