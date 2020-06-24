@@ -454,7 +454,7 @@ pdsh -a sudo service slurmd restart
 
 ### Tips and tricks
 
-Make full use of the ```sbatch``` command, such as using the --begin and --dependency parameters to schedule and string together a workflow.
+Make full use of the ```sbatch``` command, such as using the begin and dependency parameters to schedule and string together a workflow.
 
 Example using the begin parameter:
 ```
