@@ -4,7 +4,7 @@ This repository contains instructions and scripts for setting up a Nimbus Cluste
 
 Additional useful documentation:
 
-[TimoLassmann's GitHub Nimbus Cluster instructions](https://github.com/TimoLassmann/dot-files/blob/master/additional/setup_nimbus_cluster.org)
+[Timo Lassmann's Nimbus Cluster Instructions](https://github.com/TimoLassmann/dot-files/blob/master/additional/setup_nimbus_cluster.org)
 
 [Slurm Webinar](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=2ahUKEwic07CrssbpAhWl4HMBHQylDnIQFjAAegQIBRAB&url=ftp%3A%2F%2Fmicroway.com%2Fpub%2Ffor-customer%2FSDSU-Training%2FWebinar_2_Slurm_II--Ubuntu16.04_and_18.04.pdf&usg=AOvVaw3TaEKxv9Iqe5qDUCp1GjQX)
 
