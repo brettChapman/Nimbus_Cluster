@@ -465,7 +465,7 @@ sbatch --begin=now+12hours submit_2.sh
 Example using the dependency parameter:
 ```
 sbatch submit_1.sh
-200
+Submitted batch job 200
 sbatch --dependency=afterok:200 submit_2.sh
 ```
 Example using the dependency parameter with multiple jobs in a bash script:
@@ -473,17 +473,17 @@ Example using the dependency parameter with multiple jobs in a bash script:
 #!/bin/bash
 
 # first job with no dependencies
-job1=$(sbatch submit_1.sh)
+job1=$(sbatch submit_1.sh | cut -d ' ' -f 4)
 
 # second job depends on the first completing with an exit code of zero (no errors)
-job2=$(sbatch --dependency=afterok:$job1 submit_2.sh)
+job2=$(sbatch --dependency=afterok:$job1 submit_2.sh | cut -d ' ' -f 4)
 
 # multiple jobs can depend on the second job completing
-job3=$(sbatch --dependency=afterok:$job2 submit_3.sh)
-job4=$(sbatch --dependency=afterok:$job2 submit_4.sh)
+job3=$(sbatch --dependency=afterok:$job2 submit_3.sh | cut -d ' ' -f 4)
+job4=$(sbatch --dependency=afterok:$job2 submit_4.sh | cut -d ' ' -f 4)
 
 # the final job can depend on multiple jobs completing
-job5=$(sbatch  --dependency=afterok:$job3:$job4 submit_5.sh)
+job5=$(sbatch  --dependency=afterok:$job3:$job4 submit_5.sh | cut -d ' ' -f 4)
 ```
 
 See the [sbatch](https://slurm.schedmd.com/sbatch.html) user page for more information and don't be afraid to look around online for other ideas to become familiar with the usage of different slurm commands.
