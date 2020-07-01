@@ -439,7 +439,7 @@ In this example we are running the job across 3 nodes, each with 8 cores, totall
 
 When expanding the size of your cluster you will need to revisit step 1 onwards and install munge, slurm and all the other dependent software.
 
-You will also need to update your ```/etc/genders```, ```/etc/hosts``` and your ```/etc/slurm-llnl/slurm.conf``` file. It is easier just to re-run most of the scripts from the start with subtle changes to the ```/etc/hosts``` and ```slurm.conf``` files, as these need to be distributed across the nodes, as well as the munge key.
+You will also need to update your ```/etc/genders```, ```/etc/hosts``` and your ```/etc/slurm-llnl/slurm.conf``` file. It is easier just to re-run most of the scripts from the start with subtle changes to the ```/etc/hosts``` and ```slurm.conf``` files, as these will need to be redistributed across the nodes, as well as the munge key.
 
 Updating the ```slurm.conf``` file can simply be the addition of an identical node with the exact same hardware (simply change ```node-[1-3]``` to ```node-[1-4]``` etc.
 
