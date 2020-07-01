@@ -453,6 +453,13 @@ PartitionName=debug Nodes=node-[1-3] Default=YES MaxTime=INFINITE State=UP
 PartitionName=batch Nodes=node-[4] MaxTime=INFINITE State=UP
 ```
 
+When submitting jobs on the new nodes with a different partition, in this case ```batch``` on nodes with 16 cores, the following will need to be modified in all submission scripts:
+```
+#SBATCH --ntasks-per-node=16
+
+#SBATCH --partition=batch
+```
+
 ### Troubleshooting
 
 
