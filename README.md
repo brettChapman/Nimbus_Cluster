@@ -439,7 +439,7 @@ In this example we are running the job across 3 nodes, each with 8 cores, totall
 
 When expanding the size of your cluster you will need to revisit step 1 onwards, setup your mounted shared drive /data with a now modified ```setup_NFS.sh``` script with the additional nodes IP, install munge, slurm and all the other dependent software.
 
-You will also need to update your ```/etc/genders```, ```/etc/hosts``` and your ```/etc/slurm-llnl/slurm.conf``` file. It is easier just to re-run most of the scripts from the start with subtle changes to the ```/etc/hosts``` and ```slurm.conf``` files, as these will need to be redistributed across the nodes, as well as the munge key.
+You will also need to update your ```/etc/genders```, ```/etc/hosts``` and your ```/etc/slurm-llnl/slurm.conf``` files. It is easier just to re-run most of the scripts from the start with subtle changes to the ```/etc/hosts``` and ```slurm.conf``` files, as these will need to be redistributed across the nodes, as well as the munge key.
 
 Updating the ```slurm.conf``` file can simply be the addition of an identical node with the exact same hardware (simply change ```node-[1-3]``` to ```node-[1-4]``` etc.
 
@@ -452,6 +452,8 @@ NodeName=node-[4] CPUs=16 RealMemory=64323 Sockets=1 CoresPerSocket=8 ThreadsPer
 PartitionName=debug Nodes=node-[1-3] Default=YES MaxTime=INFINITE State=UP
 PartitionName=batch Nodes=node-[4] MaxTime=INFINITE State=UP
 ```
+
+Since slurm is already up and running, all the services will need to be restarted for the changes to take affect. Simply follow the troubleshooting steps in the next section for restarting all the nodes and services.
 
 When submitting jobs on the new nodes with a different partition, in this case ```batch``` on nodes with 16 cores, the following will need to be modified in all submission scripts:
 ```
