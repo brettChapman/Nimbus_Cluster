@@ -437,7 +437,7 @@ In this example we are running the job across 3 nodes, each with 8 cores, totall
 
 ### Adding additional nodes to your cluster
 
-When expanding the size of your cluster you will need to revisit step 1 onwards and install munge, slurm and all the other dependent software.
+When expanding the size of your cluster you will need to revisit step 1 onwards, setup your mounted shared drive /data with a now modified ```setup_NFS.sh`` script with the additional nodes IP, install munge, slurm and all the other dependent software.
 
 You will also need to update your ```/etc/genders```, ```/etc/hosts``` and your ```/etc/slurm-llnl/slurm.conf``` file. It is easier just to re-run most of the scripts from the start with subtle changes to the ```/etc/hosts``` and ```slurm.conf``` files, as these will need to be redistributed across the nodes, as well as the munge key.
 
