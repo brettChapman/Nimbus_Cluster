@@ -448,7 +448,7 @@ In this example we are running the job across 3 nodes, each with 8 cores, totall
 for i in {1..3}; do sudo scontrol update NodeName=node-$i state=idle; done
 
 sudo service slurmctld restart
-
+sudo service slurmdbd restart
 pdsh -a sudo service slurmd restart
 ```
 
