@@ -467,8 +467,6 @@ When submitting jobs on the new nodes with a different partition, in this case `
 
 - If at any time job output stops appearing in the /data directory, it may be that the shared /data folders are no longer mounted. Therefore, rerun the setup_NFS.sh script again.
 
-- If for whatever reason Munge or other Slurm services go inactive, try rerunning the scripts, and if all else fails, hard-reboot all nodes and re-initialise all the services.
-
 - If after a cluster configuration change (altering ```slurm.conf```), reboot or power outage, your worker nodes may remain down and slurmd inactive, which can be seen by running ```sinfo``` and ```pdsh -a sudo systemctl status slurmd```. Try resetting and restarting all nodes and services, simply by running the following commands (amend to the number of worker nodes):
 
 ```
@@ -478,6 +476,8 @@ sudo service slurmctld restart
 sudo service slurmdbd restart
 pdsh -a sudo service slurmd restart
 ```
+
+- If for whatever reason Munge or other Slurm services go inactive, and no other methods seem to work, try rerunning all the scripts, and then if all else fails, try hard-reboot all nodes and then re-initialising all the nodes and services.
 
 ### Tips and tricks
 
