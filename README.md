@@ -477,7 +477,7 @@ sudo service slurmdbd restart
 pdsh -a sudo service slurmd restart
 ```
 
-- If for whatever reason Munge or other Slurm services go inactive, and no other methods seem to work, try rerunning all the scripts, and then if all else fails, try hard-reboot all nodes and then re-initialising all the nodes and services.
+- If for whatever reason Munge or other Slurm services go inactive, and no other methods seem to work, try rerunning all the scripts, and then if all else fails, try hard-rebooting all nodes and then re-initialising all the nodes and services.
 
 ### Tips and tricks
 
