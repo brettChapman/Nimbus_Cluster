@@ -469,7 +469,7 @@ When submitting jobs on the new nodes with a different partition, in this case `
 
 - If for whatever reason Munge or other Slurm services go inactive, try rerunning the scripts, and if all else fails, hard-reboot all nodes and re-initialise all the services.
 
-- If after a reboot or power outage your worker nodes remain down and slurmd remains inactive, which can be seen by running ```sinfo``` and ```pdsh -a sudo systemctl status slurmd```, run the following (amend to the number of worker nodes):
+- If after a cluster configuration change (altering ```slurm.conf```), reboot or power outage your worker nodes remain down and slurmd remains inactive, which can be seen by running ```sinfo``` and ```pdsh -a sudo systemctl status slurmd```, try resetting and restarting all nodes and services, simply by running the following commands (amend to the number of worker nodes):
 
 ```
 for i in {1..3}; do sudo scontrol update NodeName=node-$i state=idle; done
