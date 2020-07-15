@@ -453,6 +453,12 @@ PartitionName=debug Nodes=node-[1-3] Default=YES MaxTime=INFINITE State=UP
 PartitionName=batch Nodes=node-[4] MaxTime=INFINITE State=UP
 ```
 
+If previously configured nodes have changed IPs (for example if you delete the node-1 instance and replace node-1 with a new instance and IP) then you will need to first update the known hosts. Use the following command (amend to the number of worker nodes):
+
+```
+for i in {1..4}; do ssh-keygen -R node-$i; done
+```
+
 Since slurm is already up and running, all the services will need to be restarted for the changes to take affect. Simply follow the troubleshooting steps in the next section for restarting all the nodes and services.
 
 When submitting jobs on the new nodes with a different partition, in this case ```batch``` on nodes with 16 cores, the following will need to be modified in all submission scripts:
