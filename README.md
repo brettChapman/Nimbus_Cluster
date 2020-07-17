@@ -292,9 +292,12 @@ sudo systemctl status slurmdbd
 
 sudo systemctl stop slurmctld
 sudo systemctl start slurmctld
+sudo systemctl status slurmctld
 
-pdsh -a sudo systemctl stop slurmd
+pdsh -a sudo systemctl stop slurred
 pdsh -a sudo systemctl enable slurmd
+pdsh -a sudo systemctl status slurmd
+
 pdsh -a sudo slurmd
 
 pdsh -a sudo slurmd -Dcvvv
@@ -313,13 +316,13 @@ pdsh -a sudo cat /var/log/slurm-llnl/slurmd.log | less -S
 ```
 sudo systemctl enable slurmdbd
 sudo systemctl start slurmdbd
-sudo systemctl status slurmdbd
 
 sudo systemctl stop slurmctld
 sudo systemctl start slurmctld
 
 pdsh -a sudo systemctl stop slurmd
 pdsh -a sudo systemctl enable slurmd
+
 pdsh -a sudo slurmd
 ```
 Note: You should now be able to run the following commands with no problems:
