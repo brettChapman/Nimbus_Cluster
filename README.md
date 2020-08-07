@@ -338,7 +338,11 @@ scontrol ping (pings slurmctld and shows its status)
 
 ### Setup NFS data volume
 
-#### 1.	Look in /etc/hosts on the master node (node-0 in this case):
+#### 1. It is advised to first mount a large volume to your master node, outlined here: [Attaching a storage volume](https://support.pawsey.org.au/documentation/display/US/Attach+a+Storage+Volume). 
+
+Note: I created instances with 300GB each root volume, and added an additional volume of 30TB to be mounted to my master node (I had 33TB volume quota). 
+
+#### 2.	Look in /etc/hosts on the master node (node-0 in this case):
 ```
 grep 192.168 /etc/hosts
 192.168.0.57 node-0
@@ -346,9 +350,9 @@ grep 192.168 /etc/hosts
 192.168.0.65 node-2
 192.168.0.69 node-3
 ```
-#### 2.	Replace your IP addresses in the setup_NFS.sh script. The final mounted disk is on the master node (in this case node-0 with IP 192.168.0.57).
+#### 3.	Replace your IP addresses in the setup_NFS.sh script. The final mounted disk is on the master node (in this case node-0 with IP 192.168.0.57).
 
-Note: If mounting the folders goes wrong and you end up with stale file handles, just soft reboot the instances and then you can remove the 	folders.
+Note: If mounting the folders goes wrong and you end up with stale file handles, just soft reboot the instances and then you can remove the folders.
 
 Run:
 ```
@@ -400,7 +404,7 @@ pdsh -a sudo rm -rf /usr/local/libexec/singularity
 Decide on a release version from: [https://github.com/hpcng/singularity/releases](https://github.com/hpcng/singularity/releases)
 In this case we chose version 3.5.3
 
-Copy scripts singularity_per_node.sh and install_singularity.sh to your home directory and edit them as necessary with your choice of Singularity 	version
+Copy scripts singularity_per_node.sh and install_singularity.sh to your home directory and edit them as necessary with your choice of Singularity version
 
 Run:
 ```
