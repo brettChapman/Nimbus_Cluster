@@ -131,6 +131,7 @@ slurmd -C
 - Set StateSaveLocation to /var/spool/slurm-llnl
 - Set ProctrackType to Cgroup
 - Set TaskPlugin to Cgroup
+- Set AccountingStorageType to FileTxt
 - Set SlurmctldLogFile to /var/log/slurm-llnl/slurmctld.log
 - Set SlurmdLogFile to /var/log/slurm-llnl/slurmd.log
 - Set SlurmctldPidFile to /var/run/slurmctld.pid
@@ -144,7 +145,6 @@ slurmd -C
 - Set JobCompUser to slurm
 - Set JobCompPass to password (or whatever password was chosen for MariaDB)
 - Set JobAcctGatherType to None
-- Set AccountingStorageType to FileTxt
 - All other settings can be left as default.
 
 Finally copy the output of the configurator webpage into a file called slurm.conf and send a copy to the home directory of your master node (simply copying and pasting into the file works best to preserve formatting). 
