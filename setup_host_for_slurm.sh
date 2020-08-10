@@ -19,6 +19,7 @@ sudo mv ~/slurm.conf /etc/slurm-llnl/slurm.conf
 sudo chown slurm:slurm /etc/slurm-llnl/slurm.conf
 sudo chown slurm:slurm /var/spool/slurm-llnl
 sudo chown slurm:slurm /var/spool/slurmd
+sudo chown slurm:slurm /var/log/
 sudo chown slurm:slurm /var/log/slurm-llnl
 sudo chown slurm:slurm /var/log/slurm-llnl/slurmctld.log
 sudo chown slurm:slurm /var/log/slurm-llnl/slurmd.log

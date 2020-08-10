@@ -132,6 +132,7 @@ slurmd -C
 - Set ProctrackType to Cgroup
 - Set TaskPlugin to Cgroup
 - Set AccountingStorageType to FileTxt
+- Set JobAcctGatherType to None
 - Set SlurmctldLogFile to /var/log/slurm-llnl/slurmctld.log
 - Set SlurmdLogFile to /var/log/slurm-llnl/slurmd.log
 - Set SlurmctldPidFile to /var/run/slurmctld.pid
@@ -144,7 +145,6 @@ slurmd -C
 - Set JobCompHost to localhost
 - Set JobCompUser to slurm
 - Set JobCompPass to password (or whatever password was chosen for MariaDB)
-- Set JobAcctGatherType to None
 - All other settings can be left as default.
 
 Finally copy the output of the configurator webpage into a file called slurm.conf and send a copy to the home directory of your master node (simply copying and pasting into the file works best to preserve formatting). 
@@ -334,6 +334,14 @@ sacct (requires SlurmDBD and shows previous or running jobs)
 scontrol show jobs (shows details of currently running jobs)
 scontrol ping (pings slurmctld and shows its status)
 ```
+
+If after setting up all services, some services appear to be inactive after runninng the ```status``` commands, try running the following commands to restart them:
+```
+sudo service slurmctld restart
+sudo service slurmdbd restart
+pdsh -a sudo service slurmd restart
+```
+
 ### **Note: I successfully ran Slurm with Ubuntu 20.04 LTS and Slurm version 19.05.5 (for some reason the Slurm controller appears to only fail when using the Pawsey custom built Ubuntu images).**
 
 ### Setup NFS data volume
