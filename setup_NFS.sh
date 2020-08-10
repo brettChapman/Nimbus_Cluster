@@ -1,5 +1,3 @@
-sudo mkdir /data
-
 pdsh -a sudo apt-get -yq install nfs-common
 sudo apt-get install -yq rpcbind nfs-kernel-server
 

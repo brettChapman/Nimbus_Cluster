@@ -10,7 +10,7 @@ Additional useful documentation:
 
 [Slurm Resource Management](https://www.admin-magazine.com/HPC/Articles/Resource-Management-with-Slurm)
 
-[Slurm installation Wiki](https://wiki.fysik.dtu.dk/niflheim/Slurm_installation)
+[Slurm Wiki](https://wiki.fysik.dtu.dk/niflheim/SLURM)
 
 [Slurm database installation Wiki](https://wiki.fysik.dtu.dk/niflheim/Slurm_database)
 
