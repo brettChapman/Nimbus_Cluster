@@ -8,6 +8,7 @@ sudo mkdir -p /var/log/slurm-llnl
 sudo touch /var/log/slurm-llnl/slurmctld.log
 sudo touch /var/log/slurm-llnl/slurmd.log
 sudo touch /var/log/slurm-llnl/slurmdbd.log
+sudo touch /run/slurmd.pid
 
 sudo -- sh -c "cat > /etc/slurm-llnl/cgroup.conf << 'EOF'
 CgroupAutomount=yes
@@ -25,3 +26,4 @@ sudo chown slurm:slurm /var/log/slurm-llnl/slurmctld.log
 sudo chown slurm:slurm /var/log/slurm-llnl/slurmd.log
 sudo chown slurm:slurm /var/log/slurm-llnl/slurmdbd.log
 sudo chown slurm:slurm /etc/slurm-llnl/cgroup.conf
+sudo chown slurm:slurm /run/slurmd.pid
