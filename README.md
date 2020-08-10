@@ -138,7 +138,7 @@ slurmd -C
 
 ##### The below settings are for configuring SlurmDBD and are optional (they can be left out if SlurmDBD is not needed or for debugging purposes, and added in later)
 
-- Set JobCompType to MySQL
+- Set JobCompType to MySQL (set to none if leaving out SlurmDBD)
 - Set JobCompLoc to slurm_acct_db
 - Set JobCompHost to localhost
 - Set JobCompUser to slurm
@@ -296,7 +296,7 @@ sudo systemctl stop slurmctld
 sudo systemctl start slurmctld
 sudo systemctl status slurmctld
 
-pdsh -a sudo systemctl stop slurred
+pdsh -a sudo systemctl stop slurmd
 pdsh -a sudo systemctl enable slurmd
 pdsh -a sudo systemctl status slurmd
 
