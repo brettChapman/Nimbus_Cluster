@@ -1,5 +1,5 @@
-sudo touch /run/slurmd.pid
-sudo chown slurm:slurm /run/slurmd.pid
+sudo touch /var/run/slurmd.pid
+sudo chown slurm:slurm /var/run/slurmd.pid
 
 sudo apt-get install slurm-client
 
