@@ -1,8 +1,3 @@
-sudo touch /run/slurmdbd.pid
-sudo touch /run/slurmctld.pid
-sudo chown slurm:slurm /run/slurmdbd.pid
-sudo chown slurm:slurm /run/slurmctld.pid
-
 sudo apt-get install slurmctld slurmdbd
 sudo apt-get install mailutils -yq
 pdsh -a sudo apt-get update
