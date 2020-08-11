@@ -18,7 +18,6 @@ sudo mkdir -p /var/spool/slurm-llnl
 sudo chown slurm:slurm /var/spool/slurm-llnl
 sudo mkdir -p /var/spool/slurmd
 sudo chown slurm:slurm /var/spool/slurmd
-sudo chown slurm:slurm /var/log/
 sudo mkdir -p /var/log/slurm-llnl
 sudo touch /var/log/slurm-llnl/slurmctld.log
 sudo touch /var/log/slurm-llnl/slurmd.log
