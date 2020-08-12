@@ -335,9 +335,12 @@ scontrol ping (pings slurmctld and shows its status)
 
 If after setting up all services, some services appear to be inactive after runninng the ```status``` commands, try running the following commands to restart them:
 ```
-sudo service slurmctld restart
 sudo service slurmdbd restart
+sudo service slurmctld restart
 pdsh -a sudo service slurmd restart
+sudo systemctl status slurmdbd
+sudo systemctl status slurmctld
+pdsh -a sudo systemctl status slurmd
 ```
 
 ### **Note: I successfully ran Slurm with Ubuntu 20.04 LTS and Slurm version 19.05.5 (for some reason the Slurm controller appears to only fail when using the Pawsey custom built Ubuntu images).**
@@ -497,6 +500,23 @@ pdsh -a sudo service slurmd restart
 ```
 
 - If for whatever reason Munge or other Slurm services go inactive, and no other methods seem to work, try rerunning all the scripts, and then if all else fails, try hard-rebooting all nodes and then re-initialising all the nodes and services.
+
+- If the /data drive becomes unmounted, simply run ```sudo mount /dev/vdc /data```
+
+- If slurmd becomes unresponsive and the process becomes stuck (you see ```Unable to bind listen port (*:6818): Address already in use``` when running ```sudo slurmd -Dvvv```), then kill the slurmd processes on all nodes by running the following:
+```
+pdsh -a sudo killall -9 slurmd
+```
+- If for whatever reason, you want to start from the beginning again you can either destroy the instances and start again or uninstall slurm, munge and slurmdbd by running the following:
+
+```
+sudo apt-get remove --auto-remove slurmctld -y
+sudo apt-get remove --auto-remove slurmdbd -y
+sudo apt-get remove --auto-remove munge -y
+
+pdsh -a sudo apt-get remove --auto-remove slurmd -y
+pdsh -a sudo apt-get remove --auto-remove munge -y
+```
 
 ### Tips and tricks
 
