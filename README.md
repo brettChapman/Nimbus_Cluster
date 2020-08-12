@@ -328,7 +328,7 @@ pdsh -a sudo slurmd
 Note: You should now be able to run the following commands with no problems:
 ```
 sinfo (displays node information)
-sacct (requires SlurmDBD and shows previous or running jobs)
+sudo sacct (requires SlurmDBD and shows previous or running jobs)
 scontrol show jobs (shows details of currently running jobs)
 scontrol ping (pings slurmctld and shows its status)
 ```
