@@ -386,7 +386,6 @@ Then soft-reboot all the nodes
 
 ```
 sudo apt install golang -y
-	
 pdsh -a sudo apt install golang -y
 ```
 
