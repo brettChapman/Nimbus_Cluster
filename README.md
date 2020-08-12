@@ -53,7 +53,6 @@ Note: You may need to update and upgrade first if pdsh isn’t in the package li
 ```
 sudo apt-get update -y
 sudo apt-get -yq upgrade
-
 sudo apt-get install pdsh -y
 ```
 #### 2.	Install pdsh across all nodes:
@@ -66,7 +65,6 @@ pdsh -a sudo apt-get install pdsh -y
 ```
 sudo apt-get update -y
 sudo apt-get -yq upgrade
-
 pdsh -a sudo apt-get update
 pdsh -a sudo apt-get -yq upgrade
 ```
