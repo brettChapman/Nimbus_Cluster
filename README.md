@@ -333,7 +333,7 @@ scontrol show jobs (shows details of currently running jobs)
 scontrol ping (pings slurmctld and shows its status)
 ```
 
-If after setting up all services, some services appear to be inactive after runninng the ```status``` commands, try running the following commands to restart them:
+If after setting up all services, some services appear to be inactive (dead)/failed after running the ```status``` commands, try running the following commands to restart them (I found this to be the case for slurmd with my 2nd slurm cluster setup):
 ```
 sudo service slurmdbd restart
 sudo service slurmctld restart
