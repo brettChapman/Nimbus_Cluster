@@ -347,7 +347,7 @@ pdsh -a sudo systemctl status slurmd
 
 ### Setup NFS data volume
 
-#### 1. It is advised to first mount a large volume to your master node, outlined here: [Attaching a storage volume](https://support.pawsey.org.au/documentation/display/US/Attach+a+Storage+Volume). An example of a 10 node cluster with 1 master node, first create instances with 300GB each root volume, and add an additional separate volume of 30TB to be mounted to the master node from a volume quota of 33TB. 
+#### 1. It is advised to first mount a large volume to your master node, outlined here: [Attaching a storage volume](https://support.pawsey.org.au/documentation/display/US/Attach+a+Storage+Volume). An example of a 20 node cluster with 1 master node, first create instances with 300GB each root volume, and add an additional separate volume of 94.54TB to be mounted to the master node from a volume quota of 100TB. If resizing the volume before reattaching, follow the steps in the link provided.
 
 #### 2.	Look in /etc/hosts on the master node (node-0 in this case):
 ```
