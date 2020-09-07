@@ -517,7 +517,8 @@ pdsh -a sudo apt-get remove --auto-remove slurmd -y
 pdsh -a sudo apt-get remove --auto-remove munge -y
 ```
 
-- If you're trying to unmount a drive to resize the drive before reattaching, and the drive appears busy, use the ```fuser -m``` command. For example:
+- If you're trying to unmount a drive to resize the drive before reattaching and the drive appears busy, use the ```fuser -m``` command. For example:
+
 ```
 ubuntu@node-0:/data/$ fuser -m /data
 /data:               31346c
@@ -527,9 +528,9 @@ UID        PID  PPID  C STIME TTY      STAT   TIME CMD
 ubuntu   31346 31345  0 08:56 pts/0    Ss     0:00 -bash
 ```
 
-Use ```man fuser``` for more information.
+- Use the ```man fuser``` command for more information.
 
-Kill any running process and edit any auto-mounts in ```/etc/fstab```, and shut down the instance before attempting to detach the volume in the Nimbus dashboard. 
+- Usethe ``kill``` command on any running process and edit any auto-mounts in ```/etc/fstab```, and then shut down the instance before attempting to detach the volume in the Nimbus dashboard. 
 
 
 ### Tips and tricks
