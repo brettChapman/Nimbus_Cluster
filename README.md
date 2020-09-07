@@ -525,7 +525,7 @@ pdsh -a sudo apt-get remove --auto-remove munge -y
 ubuntu@node-0:/data/$ fuser -m /data
 /data:               31346c
 
-ubuntu@node-01:/data/$ ps -f 31346
+ubuntu@node-0:/data/$ ps -f 31346
 UID        PID  PPID  C STIME TTY      STAT   TIME CMD
 ubuntu   31346 31345  0 08:56 pts/0    Ss     0:00 -bash
 ```
