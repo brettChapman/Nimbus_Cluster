@@ -489,7 +489,6 @@ When submitting jobs on the new nodes with a different partition, in this case `
 - If at any time job output stops appearing in the /data directory, it may be that the shared /data folders are no longer mounted. Therefore, rerun the setup_NFS.sh script again.
 
 - If after a cluster configuration change (altering ```slurm.conf```), reboot or power outage, your worker nodes may remain down and slurmd inactive, which can be seen by running ```sinfo``` and ```pdsh -a sudo systemctl status slurmd```. Try resetting and restarting all nodes and services, simply by running the following commands (amend to the number of worker nodes):
-
 ```
 for i in {1..3}; do sudo scontrol update NodeName=node-$i state=idle; done
 
@@ -507,7 +506,6 @@ pdsh -a sudo service slurmd restart
 pdsh -a sudo killall -9 slurmd
 ```
 - If for whatever reason, you want to start from the beginning again you can either destroy the instances and start again or uninstall slurm, munge and slurmdbd by running the following:
-
 ```
 sudo apt-get remove --auto-remove slurmctld -y
 sudo apt-get remove --auto-remove slurmdbd -y
@@ -518,7 +516,6 @@ pdsh -a sudo apt-get remove --auto-remove munge -y
 ```
 
 - If you're trying to unmount a drive to resize the drive before reattaching and the drive appears busy, use the ```fuser -m``` command. For example:
-
 ```
 ubuntu@node-0:/data/$ fuser -m /data
 /data:               31346c
