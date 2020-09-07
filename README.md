@@ -527,7 +527,7 @@ ubuntu   31346 31345  0 08:56 pts/0    Ss     0:00 -bash
 
 - Use the ```man fuser``` command for more information.
 
-- Usethe ``kill``` command on any running process and edit any auto-mounts in ```/etc/fstab```, and then shut down the instance before attempting to detach the volume in the Nimbus dashboard. 
+- Use the ```kill``` command on any running process and edit any auto-mounts in ```/etc/fstab```, and then shut down the instance before attempting to detach the volume in the Nimbus dashboard. 
 
 
 ### Tips and tricks
