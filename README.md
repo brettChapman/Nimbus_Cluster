@@ -347,7 +347,7 @@ pdsh -a sudo systemctl status slurmd
 
 ### Setup NFS data volume
 
-#### 1. It is advised to first mount a large volume to your master node, outlined here: [Attaching a storage volume](https://support.pawsey.org.au/documentation/display/US/Attach+a+Storage+Volume). An example of a 20 node cluster with 1 master node, first create instances with 300GB each root volume, and add an additional separate volume of 94.54TB to be mounted to the master node from a volume quota of 100TB. If resizing the volume before reattaching, follow the steps in the link provided.
+#### 1. It is advised to first mount a large volume to your master node, outlined here: [Attaching a storage volume](https://support.pawsey.org.au/documentation/display/US/Attach+a+Storage+Volume). An example of a 20 node cluster with 1 master node, first create instances with 300GB each root volume, and add an additional separate volume of 94.54TB to be mounted to the master node from a volume quota of 100TB. If resizing the volume before reattaching, follow the steps in the link provided, and if unmounting the drive first becomes an issue with drive busy warnings, then follow the steps in the trouble shooting section.
 
 #### 2.	Look in /etc/hosts on the master node (node-0 in this case):
 ```
@@ -516,6 +516,21 @@ sudo apt-get remove --auto-remove munge -y
 pdsh -a sudo apt-get remove --auto-remove slurmd -y
 pdsh -a sudo apt-get remove --auto-remove munge -y
 ```
+
+- If you're trying to unmount a drive to resize the drive before reattaching, and the drive appears busy, use the ```fuser -m``` command. For example:
+```
+ubuntu@node-0:/data/$ fuser -m /data
+/data:               31346c
+
+ubuntu@node-01:/data/$ ps -f 31346
+UID        PID  PPID  C STIME TTY      STAT   TIME CMD
+ubuntu   31346 31345  0 08:56 pts/0    Ss     0:00 -bash
+```
+
+Use ```man fuser``` for more information.
+
+Kill any running process and edit any auto-mounts in ```/etc/fstab```, and shut down the instance before attempting to detach the volume in the Nimbus dashboard. 
+
 
 ### Tips and tricks
 
