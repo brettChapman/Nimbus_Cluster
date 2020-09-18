@@ -396,13 +396,13 @@ sudo apt-get remove golang-go
 sudo apt-get remove --auto-remove golang-go
 ```
 
-Second, remove any GO binaries from ```/user/local/go/```
+Second, remove the GO folder from ```/user/local/go```
 
 Third, run the following:
 ```
 wget https://dl.google.com/go/go1.13.9.linux-amd64.tar.gz
 tar xf go1.13.9.linux-amd64.tar.gz
-sudo mv go /usr/local/go
+sudo mv go /usr/local/
 
 export GOROOT=/usr/local/go
 export PATH=$GOROOT/bin:$PATH
