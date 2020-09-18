@@ -390,22 +390,34 @@ pdsh -a sudo apt-get install golang -y
 ```
 The GO version needed is >1.13. If the system you're installing on only apt-get installs versions <1.13, then try the following:
 
-First uninstall GO:
+First uninstall the incorrect version of GO:
 ```
 sudo apt-get remove golang-go
 sudo apt-get remove --auto-remove golang-go
+
+pdsh -a sudo apt-get remove golang-go
+pdsh -a sudo apt-get remove --auto-remove golang-go
 ```
 
-Second, remove the GO folder from ```/user/local/go```
+Second, remove the GO folder:
+```
+sudo rm -dr /usr/local/go
+pdsh -a rm -dr /usr/local/go
+```
 
 Third, run the following:
 ```
-wget https://dl.google.com/go/go1.13.9.linux-amd64.tar.gz
-tar xf go1.13.9.linux-amd64.tar.gz
-sudo mv go /usr/local/
+sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:longsleep/golang-backports
+sudo apt-get update -y
+sudo apt-get -yq upgrade
+sudo apt-get install golang-go -y
 
-export GOROOT=/usr/local/go
-export PATH=$GOROOT/bin:$PATH
+pdsh -a sudo apt-get install software-properties-common
+pdsh -a sudo add-apt-repository ppa:longsleep/golang-backports
+pdsh -a sudo apt-get update -y
+pdsh -a sudo apt-get -yq upgrade
+pdsh -a sudo apt-get install golang-go -y
 ```
 
 #### 3.	Installation of Singularity
