@@ -370,8 +370,8 @@ bash ./setup_NFS.sh
 #### 1.	Installation of Docker
 	
 ```
-sudo apt install docker.io -y
-pdsh -a sudo apt install docker.io -y
+sudo apt-get install docker.io -y
+pdsh -a sudo apt-get install docker.io -y
 
 sudo systemctl enable --now docker 
 pdsh -a sudo systemctl enable --now docker
@@ -385,8 +385,27 @@ Then soft-reboot all the nodes
 #### 2.	Installation of GO
 
 ```
-sudo apt install golang -y
-pdsh -a sudo apt install golang -y
+sudo apt-get install golang -y
+pdsh -a sudo apt-get install golang -y
+```
+The GO version needed is >1.13. If the system you're installing on only apt-get installs versions <1.13, then try the following:
+
+First uninstall GO:
+```
+sudo apt-get remove golang-go
+sudo apt-get remove --auto-remove golang-go
+```
+
+Second, remove any GO binaries from ```/user/local/go/```
+
+Third, run the following:
+```
+wget https://dl.google.com/go/go1.13.9.linux-amd64.tar.gz
+tar xf go1.13.9.linux-amd64.tar.gz
+sudo mv go /usr/local/go
+
+export GOROOT=/usr/local/go
+export PATH=$GOROOT/bin:$PATH
 ```
 
 #### 3.	Installation of Singularity
