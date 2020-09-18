@@ -402,7 +402,7 @@ pdsh -a sudo apt-get remove --auto-remove golang-go
 Second, remove the GO folder:
 ```
 sudo rm -dr /usr/local/go
-pdsh -a rm -dr /usr/local/go
+pdsh -a sudo rm -dr /usr/local/go
 ```
 
 Third, run the following:
