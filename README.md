@@ -77,7 +77,7 @@ pdsh -a sudo apt-get -yq install libmunge-dev libmunge2 munge
 ```
 #### 2.	Sync munge key across all nodes:
 
-Copy scripts munge_per_node.sh and distribute_munge.sh to your home directory.
+Copy scripts ```munge_per_node.sh``` and ```distribute_munge.sh``` to your home directory.
 
 Run:
 ```
@@ -153,9 +153,9 @@ pdcp -a /etc/hosts ~/
 ```
 #### 4.	Copy and run the following scripts:
 
-Copy scripts setup_host_for_slurm.sh and install_slurm.sh to your home directory.
+Copy scripts ```setup_host_for_slurm.sh``` and ```install_slurm.sh``` to your home directory.
 
-The install_slurm.sh script configures the master node, copies the setup_host_for_slurm.sh script to all nodes and configures them. It is expected that the slurm.conf file is in the home directory of user ubuntu.
+The ```install_slurm.sh``` script configures the master node, copies the ```setup_host_for_slurm.sh``` script to all nodes and configures them. It is expected that the ```slurm.conf``` file is in the home directory of user ubuntu.
 
 Run:
 ```
@@ -357,7 +357,7 @@ grep 192.168 /etc/hosts
 192.168.0.65 node-2
 192.168.0.69 node-3
 ```
-#### 3.	Replace your IP addresses in the setup_NFS.sh script. The final mounted disk is on the master node (in this case node-0 with IP 192.168.0.57).
+#### 3.	Replace your IP addresses in the ```setup_NFS.sh``` script. The final mounted disk is on the master node (in this case node-0 with IP 192.168.0.57).
 
 Note: If mounting the folders goes wrong and you end up with stale file handles, just soft reboot the instances and then you can remove the folders.
 
@@ -365,6 +365,20 @@ Run:
 ```
 bash ./setup_NFS.sh
 ```
+
+### Setup swap files across nodes
+
+If you intend to run memory intensive tasks, it's advisable to setup a swap file. I've followed instructions from [Linuxize: How to add swap space on Ubuntu 20.04] (https://linuxize.com/post/how-to-add-swap-space-on-ubuntu-20-04)
+
+Copy scripts ```distribute_swap_file.sh``` and ```swap_file_per_node.sh``` to your home directory.
+
+Replace the swap file size for the master node and worker nodes in the ```distribute_swap_file.sh``` and ```swap_file_per_node.sh``` scripts if needed (I had 35GB set for the master node and 66GB set for the worker nodes).
+
+Run:
+```
+bash ./distribute_swap_file.sh
+```
+
 ### Installing essential applications
 
 #### 1.	Installation of Docker
@@ -424,7 +438,7 @@ pdsh -a sudo apt-get install golang-go -y
 
 Install dependencies on all nodes:
 
-Copy scripts singdep_per_node.sh and singdep.sh to your home directory.	
+Copy scripts ```singdep_per_node.sh``` and ```singdep.sh``` to your home directory.	
 
 Run:
 ```
@@ -441,7 +455,7 @@ pdsh -a sudo rm -rf /usr/local/libexec/singularity
 Decide on a release version from: [https://github.com/hpcng/singularity/releases](https://github.com/hpcng/singularity/releases)
 In this case we chose version 3.5.3
 
-Copy scripts singularity_per_node.sh and install_singularity.sh to your home directory and edit them as necessary with your choice of Singularity version
+Copy scripts ```singularity_per_node.sh``` and ```install_singularity.sh``` to your home directory and edit them as necessary with your choice of Singularity version
 
 Run:
 ```
@@ -450,7 +464,7 @@ bash ./install_singularity.sh
 
 #### 4.	Compile Singularity:
 
-Copy scripts compile_singularity_per_node.sh and compile_singularity.sh to your home directory
+Copy scripts ```compile_singularity_per_node.sh``` and ```compile_singularity.sh``` to your home directory
 
 Run:
 ```
@@ -517,7 +531,7 @@ When submitting jobs on the new nodes with a different partition, in this case `
 ### Troubleshooting
 
 
-- If at any time job output stops appearing in the /data directory, it may be that the shared /data folders are no longer mounted. Therefore, rerun the setup_NFS.sh script again.
+- If at any time job output stops appearing in the /data directory, it may be that the shared /data folders are no longer mounted. Therefore, rerun the ```setup_NFS.sh``` script again.
 
 - If after a cluster configuration change (altering ```slurm.conf```), reboot or power outage, your worker nodes may remain down and slurmd inactive, which can be seen by running ```sinfo``` and ```pdsh -a sudo systemctl status slurmd```. Try resetting and restarting all nodes and services, simply by running the following commands (amend to the number of worker nodes):
 
