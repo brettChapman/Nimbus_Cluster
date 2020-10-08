@@ -368,7 +368,7 @@ bash ./setup_NFS.sh
 
 ### Setup swap files across nodes
 
-If you intend to run memory intensive tasks, it's advisable to setup a swap file. I've followed instructions from [Linuxize: How to add swap space on Ubuntu 20.04] (https://linuxize.com/post/how-to-add-swap-space-on-ubuntu-20-04)
+If you intend to run memory intensive tasks, it's advisable to setup a swap file. I've followed instructions from [Linuxize: How to add swap space on Ubuntu 20.04](https://linuxize.com/post/how-to-add-swap-space-on-ubuntu-20-04)
 
 Copy scripts ```distribute_swap_file.sh``` and ```swap_file_per_node.sh``` to your home directory.
 
