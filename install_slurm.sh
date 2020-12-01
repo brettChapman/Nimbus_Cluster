@@ -20,6 +20,7 @@ sudo -- sh -c "cat > /etc/slurm-llnl/cgroup.conf << 'EOF'
 CgroupAutomount=yes
 ConstrainCores=yes
 ConstrainDevices=yes
-ConstrainRAMSpace=yes"
+ConstrainRAMSpace=yes
+ConstrainSwapSpace=yes"
 
 sudo chown slurm: /etc/slurm-llnl/cgroup.conf

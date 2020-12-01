@@ -343,7 +343,8 @@ sudo systemctl status slurmctld
 pdsh -a sudo systemctl status slurmd
 ```
 
-### **Note: I successfully ran Slurm with Ubuntu 20.04 LTS and Slurm version 19.05.5 (for some reason the Slurm controller appears to only fail when using the Pawsey custom built Ubuntu images).**
+### **Note 1: I successfully ran Slurm with Ubuntu 20.04 LTS and Slurm version 19.05.5 (for some reason the Slurm controller appears to only fail when using the Pawsey custom built Ubuntu images).**
+### **Note 2: Ubuntu 20.04 LTS images can be obtained from http://cloud-images.ubuntu.com/ and uploaded through the OpenStack interface (LTS images are no longer available through Nimbus).**
 
 ### Setup NFS data volume
 
@@ -372,7 +373,7 @@ If you intend to run memory intensive tasks, it's advisable to setup a swap file
 
 Copy scripts ```distribute_swap_file.sh``` and ```swap_file_per_node.sh``` to your home directory.
 
-Replace the swap file size for the master node and worker nodes in the ```distribute_swap_file.sh``` and ```swap_file_per_node.sh``` scripts if needed (I had 35GB set for the master node and 66GB set for the worker nodes).
+Replace the swap file size for the master node and worker nodes in the ```distribute_swap_file.sh``` and ```swap_file_per_node.sh``` scripts if needed (I had 35GB set for the master node and 200GB set for the worker nodes).
 
 Run:
 ```
