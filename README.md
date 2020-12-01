@@ -386,7 +386,7 @@ It's important to set up a local password on each node, so that if all else fail
 
 Put the following into a bash script (script.sh) and edit the "password" to whatever you choose:
 ```
-yes "password" | sudo passwd ubuntu
+yes password | sudo passwd ubuntu
 ```
 
 Place the bash script into your home directory "~/", copy across to all nodes ```pdcp -a script.sh ~/``` and then run ```pdsh -a bash ./script.sh```
