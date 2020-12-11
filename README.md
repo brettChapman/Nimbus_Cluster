@@ -373,7 +373,7 @@ If you intend to run memory intensive tasks, it's advisable to setup a swap file
 
 Copy scripts ```distribute_swap_file.sh``` and ```swap_file_per_node.sh``` to your home directory.
 
-Replace the swap file size for the master node and worker nodes in the ```distribute_swap_file.sh``` and ```swap_file_per_node.sh``` scripts if needed (I had 35GB set for the master node and 200GB set for the worker nodes).
+Replace the swap file size for the master node and worker nodes in the ```distribute_swap_file.sh``` and ```swap_file_per_node.sh``` scripts if needed (I had 35GB set for the master node and 128GB set for the worker nodes).
 
 Run:
 ```
