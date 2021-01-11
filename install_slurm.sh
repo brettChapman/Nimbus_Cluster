@@ -13,8 +13,8 @@ sudo chown slurm: /var/spool/slurm-llnl
 sudo mkdir -p /var/spool/slurmd
 sudo chown slurm: /var/spool/slurmd
 sudo mkdir -p /var/log/slurm-llnl
-sudo chown slurm:syslog /var/log
 sudo chown slurm: /var/log/slurm-llnl
+sudo chown root:root /var/log/
 
 sudo -- sh -c "cat > /etc/slurm-llnl/cgroup.conf << 'EOF'
 CgroupAutomount=yes

@@ -348,7 +348,7 @@ pdsh -a sudo systemctl status slurmd
 
 ### Setup NFS data volume
 
-#### 1. It is advised to first mount a large volume to your master node, outlined here: [Attaching a storage volume](https://support.pawsey.org.au/documentation/display/US/Attach+a+Storage+Volume). An example of a 20 node cluster with 1 master node, first create instances with 300GB each root volume, and add an additional separate volume of 94.54TB to be mounted to the master node from a volume quota of 100TB. If resizing the volume before reattaching, follow the steps in the link provided, and if unmounting the drive first becomes an issue with drive busy warnings, then follow the steps in the trouble shooting section.
+#### 1. It is advised to first mount a large volume to your master node, outlined here: [Attaching a storage volume](https://support.pawsey.org.au/documentation/display/US/Attach+a+Storage+Volume). An example of a 20 node cluster with 1 master node, first create instances with 1TB each root volume, and add an additional large separate volume of ~100TB to be mounted to the master node. If resizing the volume before reattaching, follow the steps in the link provided, and if unmounting the drive first becomes an issue with drive busy warnings, then follow the steps in the trouble shooting section.
 
 #### 2.	Look in /etc/hosts on the master node (node-0 in this case):
 ```
@@ -373,7 +373,7 @@ If you intend to run memory intensive tasks, it's advisable to setup a swap file
 
 Copy scripts ```distribute_swap_file.sh``` and ```swap_file_per_node.sh``` to your home directory.
 
-Replace the swap file size for the master node and worker nodes in the ```distribute_swap_file.sh``` and ```swap_file_per_node.sh``` scripts if needed (I had 35GB set for the master node and 128GB set for the worker nodes).
+Replace the swap file size for the master node and worker nodes in the ```distribute_swap_file.sh``` and ```swap_file_per_node.sh``` scripts if needed (I had 35GB set for the master node and 200GB set for the worker nodes).
 
 Run:
 ```
