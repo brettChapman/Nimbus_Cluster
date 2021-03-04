@@ -26,16 +26,20 @@ Create a cluster called “node”, which can create multiple nodes at once and 
 
 On your desktop set up ssh-agent and use ForwardAgent for forwarding on SSH credentials and ensure your Nimbus SSH credentials are set up for ssh-agent in your bash_profile or bashrc script as well. Added like so: ssh-add ~/.ssh/Nimbus.pem
 
-After logging into node-0 ensure that all nodes are listed in hosts:
+Generate floating IPs to associate with each of the nodes according to [Allocate floating IP] (https://support.pawsey.org.au/documentation/display/US/Allocate+Private+External+IPs)
+
+In the Nimbus OpenStack dashboard go to "Network" -> "Floating IPs" and click on "Allocate IP to Project". Give it a description if you want to, otherwise leave the description blank, and then click on "Allocate IP". Repeat for every node you want to allocate a floating IP to for your project. Then go to "Compute" -> "Instances", and select "Associate Floating IP" from the drop-down menu to the right of the instance you want to add a floating IP to, and select the IP address. Associate each 192.168 IP address with a different floating IP (146.118) from the pool of created floating IPs. Unless the floating IPs are released they will remain the same and can be used again.
+
+After logging into node-0 ensure that all nodes are listed in hosts, with the floating IP associated with them instead of the 192.168 IP:
 
 Example:
 ```
 cat /etc/hosts
 127.0.0.1 localhost
-192.168.0.57 node-0
-192.168.0.56 node-1
-192.168.0.65 node-2
-192.168.0.69 node-3
+146.118.70.57 node-0
+146.118.65.56 node-1
+146.118.50.65 node-2
+146.118.45.69 node-3
 
 # The following lines are desirable for IPv6 capable hosts
 ::1 ip6-localhost ip6-loopback
@@ -108,7 +112,7 @@ Open the configurator in your browser.
 
 #### 2.	Generating a config file:
 
-It is critical to correctly name the master node and the worker nodes. These names have to match exactly what is shown in the OpenStack online management console.
+It is critical to correctly name the master node and the worker nodes. These names have to match exactly what is shown in the Nimbus OpenStack dashboard.
 
 Make sure the number of CPUs, main memory etc are set correctly for each worker node. If you are unsure of what these values are install the slurm daemon on a node to check: 
 
@@ -147,9 +151,10 @@ slurmd -C
 
 Finally copy the output of the configurator webpage into a file called slurm.conf and send a copy to the home directory of your master node (simply copying and pasting into the file works best to preserve formatting). 
 
-#### 3. Copy hosts to home directory of all nodes
+#### 3. Copy hosts to all nodes
 ```
 pdcp -a /etc/hosts ~/
+pdsh -a sudo mv ~/hosts /etc/hosts
 ```
 #### 4.	Copy and run the following scripts:
 
@@ -344,21 +349,21 @@ pdsh -a sudo systemctl status slurmd
 ```
 
 ### **Note 1: I successfully ran Slurm with Ubuntu 20.04 LTS and Slurm version 19.05.5 (for some reason the Slurm controller appears to only fail when using the Pawsey custom built Ubuntu images).**
-### **Note 2: Ubuntu 20.04 LTS images can be obtained from http://cloud-images.ubuntu.com/ and uploaded through the OpenStack interface (LTS images are no longer available through Nimbus).**
+### **Note 2: Ubuntu 20.04 LTS images can be obtained from http://cloud-images.ubuntu.com/ and uploaded as RAW format, through the Nimbus OpenStack dashboard, under "Compute" -> "Images" -> "Create Image", as LTS images are no longer available through Nimbus.**
 
 ### Setup NFS data volume
 
-#### 1. It is advised to first mount a large volume to your master node, outlined here: [Attaching a storage volume](https://support.pawsey.org.au/documentation/display/US/Attach+a+Storage+Volume). An example of a 20 node cluster with 1 master node, first create instances with 1TB each root volume, and add an additional large separate volume of ~100TB to be mounted to the master node. If resizing the volume before reattaching, follow the steps in the link provided, and if unmounting the drive first becomes an issue with drive busy warnings, then follow the steps in the trouble shooting section.
+#### 1. It is advised to first mount a large volume to your master node, outlined here: [Attaching a storage volume](https://support.pawsey.org.au/documentation/display/US/Attach+a+Storage+Volume). An example of a 20 node cluster with 1 master node, first create instances with 3TB each root volume, and add an additional large separate volume be mounted to the master node. If resizing the volume before reattaching, follow the steps in the link provided, and if unmounting the drive first becomes an issue with drive busy warnings, then follow the steps in the trouble shooting section.
 
 #### 2.	Look in /etc/hosts on the master node (node-0 in this case):
 ```
 grep 192.168 /etc/hosts
-192.168.0.57 node-0
-192.168.0.56 node-1
-192.168.0.65 node-2
-192.168.0.69 node-3
+146.118.70.57 node-0
+146.118.65.56 node-1
+146.118.50.65 node-2
+146.118.45.69 node-3
 ```
-#### 3.	Replace your IP addresses in the ```setup_NFS.sh``` script. The final mounted disk is on the master node (in this case node-0 with IP 192.168.0.57).
+#### 3.	Replace your IP addresses in the ```setup_NFS.sh``` script. The final mounted disk is on the master node (in this case node-0 with IP 146.118.70.57).
 
 Note: If mounting the folders goes wrong and you end up with stale file handles, just soft reboot the instances and then you can remove the folders.
 
@@ -373,7 +378,7 @@ If you intend to run memory intensive tasks, it's advisable to setup a swap file
 
 Copy scripts ```distribute_swap_file.sh``` and ```swap_file_per_node.sh``` to your home directory.
 
-Replace the swap file size for the master node and worker nodes in the ```distribute_swap_file.sh``` and ```swap_file_per_node.sh``` scripts if needed (I had 35GB set for the master node and 200GB set for the worker nodes).
+Replace the swap file size for the master node and worker nodes in the ```distribute_swap_file.sh``` and ```swap_file_per_node.sh``` scripts if needed (I had 35GB set for the master node and 2000GB set for the worker nodes -- this is highly dependent on the work loads expected).
 
 Run:
 ```
@@ -382,7 +387,7 @@ bash ./distribute_swap_file.sh
 
 ### Setup local password
 
-It's important to set up a local password on each node, so that if all else fails you can log into the instance through the OpenStack interface console on each instance.
+It's important to set up a local password on each node, so that if all else fails you can log into the instance through the Nimbus OpenStack dashboard on each instance.
 
 Put the following into a bash script (script.sh) and edit the "password" to whatever you choose:
 ```
