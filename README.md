@@ -26,7 +26,7 @@ Create a cluster called “node”, which can create multiple nodes at once and 
 
 On your desktop set up ssh-agent and use ForwardAgent for forwarding on SSH credentials and ensure your Nimbus SSH credentials are set up for ssh-agent in your bash_profile or bashrc script as well. Added like so: ssh-add ~/.ssh/Nimbus.pem
 
-Generate floating IPs to associate with each of the nodes according to [Allocate floating IP] (https://support.pawsey.org.au/documentation/display/US/Allocate+Private+External+IPs)
+Generate floating IPs to associate with each of the nodes according to [Allocate floating IP](https://support.pawsey.org.au/documentation/display/US/Allocate+Private+External+IPs)
 
 In the Nimbus OpenStack dashboard go to "Network" -> "Floating IPs" and click on "Allocate IP to Project". Give it a description if you want to, otherwise leave the description blank, and then click on "Allocate IP". Repeat for every node you want to allocate a floating IP to for your project. Then go to "Compute" -> "Instances", and select "Associate Floating IP" from the drop-down menu to the right of the instance you want to add a floating IP to, and select the IP address. Associate each 192.168 IP address with a different floating IP (146.118) from the pool of created floating IPs. Unless the floating IPs are released they will remain the same and can be used again.
 
