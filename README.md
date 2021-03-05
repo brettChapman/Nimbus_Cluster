@@ -26,20 +26,16 @@ Create a cluster called “node”, which can create multiple nodes at once and 
 
 On your desktop set up ssh-agent and use ForwardAgent for forwarding on SSH credentials and ensure your Nimbus SSH credentials are set up for ssh-agent in your bash_profile or bashrc script as well. Added like so: ssh-add ~/.ssh/Nimbus.pem
 
-Generate floating IPs to associate with each of the nodes according to [Allocate floating IP](https://support.pawsey.org.au/documentation/display/US/Allocate+Private+External+IPs)
-
-In the Nimbus OpenStack dashboard go to "Network" -> "Floating IPs" and click on "Allocate IP to Project". Give it a description if you want to, otherwise leave the description blank, and then click on "Allocate IP". Repeat for every node you want to allocate a floating IP to for your project. Then go to "Compute" -> "Instances", and select "Associate Floating IP" from the drop-down menu to the right of the instance you want to add a floating IP to, and select the IP address. Associate each 192.168 IP address with a different floating IP (146.118) from the pool of created floating IPs. Unless the floating IPs are released they will remain the same and can be used again.
-
-After logging into node-0 ensure that all nodes are listed in hosts, with the floating IP associated with them instead of the 192.168 IP:
+After logging into node-0 ensure that all nodes are listed in hosts with their associated 192.168.xx.xx IPs:
 
 Example:
 ```
 cat /etc/hosts
 127.0.0.1 localhost
-146.118.70.57 node-0
-146.118.65.56 node-1
-146.118.50.65 node-2
-146.118.45.69 node-3
+192.168.0.109 node-0
+192.168.0.112 node-1
+192.168.0.143 node-2
+192.168.0.63 node-3
 
 # The following lines are desirable for IPv6 capable hosts
 ::1 ip6-localhost ip6-loopback
@@ -358,10 +354,10 @@ pdsh -a sudo systemctl status slurmd
 #### 2.	Look in /etc/hosts on the master node (node-0 in this case):
 ```
 grep 192.168 /etc/hosts
-146.118.70.57 node-0
-146.118.65.56 node-1
-146.118.50.65 node-2
-146.118.45.69 node-3
+192.168.0.109 node-0
+192.168.0.112 node-1
+192.168.0.143 node-2
+192.168.0.63 node-3
 ```
 #### 3.	Replace your IP addresses in the ```setup_NFS.sh``` script. The final mounted disk is on the master node (in this case node-0 with IP 146.118.70.57).
 
