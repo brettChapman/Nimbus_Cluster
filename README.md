@@ -568,7 +568,7 @@ pdsh -a sudo service slurmd restart
 pdsh -a sudo killall -9 slurmd
 ```
 
-- If for whatever reason, you want to start from the beginning again you can either destroy the instances and start again or uninstall slurs, munge and slurmdbd by running the following:
+- If for whatever reason, you want to start from the beginning again you can either destroy the instances and start again or uninstall slurm, munge and slurmdbd by running the following:
 
 ```
 sudo apt-get remove --auto-remove slurmctld -y
