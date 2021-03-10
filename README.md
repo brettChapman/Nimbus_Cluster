@@ -51,21 +51,21 @@ ff02::3 ip6-allhosts
 
 Note: You may need to update and upgrade first if pdsh isn’t in the package list with.
 ```
-sudo apt-get update -y
+sudo apt-get -yq update
 sudo apt-get -yq upgrade
 sudo apt-get install pdsh -y
 ```
 #### 2.	Install pdsh across all nodes:
 ```
-pdsh -a sudo apt-get update -y
+pdsh -a sudo apt-get -yq update
 pdsh -a sudo apt-get -yq upgrade
 pdsh -a sudo apt-get install pdsh -y
 ```
 #### 3.	Ensure all the nodes are updated and upgraded if not already done:
 ```
-sudo apt-get update -y
+sudo apt-get -yq update
 sudo apt-get -yq upgrade
-pdsh -a sudo apt-get update
+pdsh -a sudo apt-get -yq update
 pdsh -a sudo apt-get -yq upgrade
 ```
 ### MUNGE setup
