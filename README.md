@@ -468,7 +468,7 @@ sudo rm -rf /usr/local/libexec/singularity
 pdsh -a sudo rm -rf /usr/local/libexec/singularity
 ```
 Decide on a release version from: [https://github.com/hpcng/singularity/releases](https://github.com/hpcng/singularity/releases)
-In this case we chose version 3.5.3
+In this case we chose version 3.7.0
 
 Copy scripts ```singularity_per_node.sh``` and ```install_singularity.sh``` to your home directory and edit them as necessary with your choice of Singularity version
 
