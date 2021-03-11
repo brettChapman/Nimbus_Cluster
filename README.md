@@ -359,7 +359,7 @@ grep 192.168 /etc/hosts
 192.168.0.143 node-2
 192.168.0.63 node-3
 ```
-#### 3.	Replace your IP addresses in the ```setup_NFS.sh``` script. The final mounted disk is on the master node (in this case node-0 with IP 146.118.70.57).
+#### 3.	Replace your IP addresses in the ```setup_NFS.sh``` script. The final mounted disk is on the master node (in this case node-0 with IP 192.168.0.109).
 
 Note: If mounting the folders goes wrong and you end up with stale file handles, just soft reboot the instances and then you can remove the folders.
 
