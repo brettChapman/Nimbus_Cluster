@@ -385,12 +385,12 @@ bash ./distribute_swap_file.sh
 
 It's important to set up a local password on each node, so that if all else fails you can log into the instance through the Nimbus OpenStack dashboard on each instance.
 
-Put the following into a bash script (script.sh) and edit the "password" to whatever you choose:
+Put the following into a bash script (update_local_password.sh) and edit the "password" to whatever you choose:
 ```
 yes password | sudo passwd ubuntu
 ```
 
-Place the bash script into your home directory "~/", copy across to all nodes ```pdcp -a script.sh ~/``` and then run ```pdsh -a bash ./script.sh```
+Place the bash script into your home directory "~/", copy across to all nodes ```pdcp -a update_local_password.sh ~/``` and then run ```pdsh -a bash ./update_local_password.sh```
 
 This will ensure you can always log into your instance from the console, if access from SSH is blocked or the instance becomes unresponsive.
 
