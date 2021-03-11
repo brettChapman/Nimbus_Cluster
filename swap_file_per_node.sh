@@ -1,4 +1,4 @@
-sudo fallocate -l 128G /swapfile
+sudo fallocate -l 2000G /swapfile
 sudo chmod 600 /swapfile
 sudo mkswap /swapfile
 sudo swapon /swapfile
