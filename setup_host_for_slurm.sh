@@ -1,6 +1,5 @@
 sudo apt-get install -yq slurm-client
 
-sudo mv ~/hosts /etc/
 sudo mkdir -p /etc/slurm-llnl
 sudo mkdir -p /var/spool/slurm-llnl
 sudo mkdir -p /var/spool/slurmd
