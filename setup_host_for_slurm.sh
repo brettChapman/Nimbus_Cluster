@@ -1,4 +1,4 @@
-sudo apt-get install slurm-client
+sudo apt-get install -yq slurm-client
 
 sudo mv ~/hosts /etc/
 sudo mkdir -p /etc/slurm-llnl

@@ -1,5 +1,5 @@
-sudo apt-get install slurmctld slurmdbd
-pdsh -a sudo apt-get update
+sudo apt-get install -yq slurmctld slurmdbd
+pdsh -a sudo apt-get -yq update
 pdsh -a sudo apt-get -yq upgrade
 pdsh -a sudo apt-get -yq install slurmd pdsh
 pdcp -a slurm.conf ~/slurm.conf
