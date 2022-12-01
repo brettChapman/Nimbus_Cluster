@@ -110,7 +110,7 @@ Open the configurator in your browser.
 
 It is critical to correctly name the master node and the worker nodes. These names have to match exactly what is shown in the Nimbus OpenStack dashboard.
 
-Make sure the number of CPUs, main memory etc are set correctly for each worker node. If you are unsure of what these values are install the slurm daemon on a node to check: 
+Make sure the number of CPUs, main memory etc are set correctly for each worker node. When setting the memory for each node, it is often better to set it slightly lower, or round down from the exact value, to avoid any memory allocation issues which can arise. If you are unsure of what these values are install the slurm daemon on a node to check: 
 
 ssh into one of the worker nodes (e.g. ssh node-1) and then:
 ```
